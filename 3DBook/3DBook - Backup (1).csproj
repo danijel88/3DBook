@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="Ardalis.SharedKernel" Version="2.1.1" />
     <PackageReference Include="Ardalis.Specification" Version="8.0.0" />
-    <PackageReference Include="Azure.Identity" Version="1.13.1" />
     <PackageReference Include="GuardClauses" Version="1.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
@@ -21,9 +20,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
   </ItemGroup>
 
 </Project>

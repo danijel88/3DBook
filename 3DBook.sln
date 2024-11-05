@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DBook", "3DBook\3DBook.csproj", "{52EA18F3-A08B-4A4E-9934-2AFF14717D7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DBook", "3DBook\3DBook.csproj", "{52EA18F3-A08B-4A4E-9934-2AFF14717D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DBook.UnitTests", "3DBook.UnitTests\3DBook.UnitTests.csproj", "{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{52EA18F3-A08B-4A4E-9934-2AFF14717D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52EA18F3-A08B-4A4E-9934-2AFF14717D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52EA18F3-A08B-4A4E-9934-2AFF14717D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
