@@ -1,17 +1,19 @@
-﻿using Ardalis.SharedKernel;
+﻿using _3DBook.Core.MachineAggregate;
+using Ardalis.SharedKernel;
 
 namespace _3DBook.Core.FolderAggregate;
 
 public class Folder : EntityBase
 {
-    public Folder(int folds, decimal enter, decimal exit, int machineId,string machineSortCode)
+    private Folder(){} //need for EF
+    public Folder(int folds, decimal enter, decimal exit,int machineId,string sortCode)
     {
+        
         GuardClauses.GuardClause.IsNegative(folds,nameof(folds));
         GuardClauses.GuardClause.IsNegative(enter, nameof(enter));
         GuardClauses.GuardClause.IsNegative(exit, nameof(exit));
         GuardClauses.GuardClause.IsZeroOrNegative(machineId, nameof(machineId));
-        GuardClauses.GuardClause.IsNullOrEmptyString(machineSortCode,nameof(machineSortCode));
-        Code = $"{folds}_{enter}_{exit}_{machineSortCode}";
+        Code = $"{folds}_{enter}_{exit}_{sortCode}";
         Folds = folds;
         Enter = enter;
         Exit = exit;

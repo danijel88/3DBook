@@ -1,4 +1,23 @@
+
+
+using _3DBook.Utils.Configurations;
+using Serilog;
+using Serilog.Extensions.Logging;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+logger.Information("Starting web host");
+builder.AddLoggerConfigs();
+
+var appLogger = new SerilogLoggerFactory(logger)
+    .CreateLogger<Program>();
+
+builder.Services.AddOptionConfigs(builder.Configuration, appLogger, builder);
+builder.Services.AddServiceConfigs(appLogger, builder);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
