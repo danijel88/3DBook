@@ -38,13 +38,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-using (var scope = app.Services.CreateScope())
-{
-    var seed = scope.ServiceProvider.GetRequiredService<SeedRolesAndUsers>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    await seed.SeedUserRolesAsync(userManager,roleManager);
-}
+
 
 app.UseRouting();
 
