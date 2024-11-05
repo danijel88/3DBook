@@ -17,6 +17,8 @@ public static class OptionConfigs
             });
 
 
+        
+
         logger.LogInformation("{Project} were configured", "Options");
         return services;
     }   

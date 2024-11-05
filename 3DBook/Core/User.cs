@@ -2,7 +2,7 @@
 
 namespace _3DBook.Core;
 
-public class UserAggregate : IdentityUser
+public class User : IdentityUser
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
