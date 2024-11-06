@@ -9,39 +9,40 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-grullo">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <div class="dropdown pb-4">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <span class="d-none d-sm-inline mx-1">Username</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
-                            </ul>
-                        }
-                    </div>
-                    <ul class="nav nav-pills  flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a class="nav-link align-middle px-0 text-white" asp-action="">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Folders</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link align-middle px-0 text-white" asp-action="">
-                                <i class="fs-4 bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Item</span>
-                            </a>
-                        </li>
-                        @*                         <li>
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-grullo">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <div class="dropdown pb-4">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">Username</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    }
+                </div>
+                <ul class="nav nav-pills  flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a class="nav-link align-middle px-0 text-white" asp-action="">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Folders</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link align-middle px-0 text-white" asp-action="">
+                            <i class="fs-4 bi-box-seam"></i> <span class="ms-1 d-none d-sm-inline">Item</span>
+                        </a>
+                    </li>
+                    @*                         <li>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                         <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
                         </a>
@@ -54,37 +55,42 @@
                         </li>
                         </ul>
                         </li> *@
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle text-white">
-                                <i class="fs-4 bi-boxes"></i> <span class="ms-1 d-none d-sm-inline">Item Type</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle text-white">
-                                <i class="fs-4 bi-building-gear"></i> <span class="ms-1 d-none d-sm-inline">Machines</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle text-white">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Users</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <hr>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle text-white">
+                            <i class="fs-4 bi-boxes"></i> <span class="ms-1 d-none d-sm-inline">Item Type</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle text-white">
+                            <i class="fs-4 bi-building-gear"></i> <span class="ms-1 d-none d-sm-inline">Machines</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle text-white">
+                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Users</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr>
 
+            </div>
+        </div>
+        <div class="col py-3" id="content">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" id="loader" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-            <div class="col py-3">
-                @RenderBody()
-            </div>
-
+            @RenderBody()
         </div>
+
     </div>
+</div>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
