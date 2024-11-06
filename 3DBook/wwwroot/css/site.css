@@ -20,3 +20,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+.bg-grullo {
+    background-color: #A89A8C;
+}
+.bg-pastel-gray {
+    background-color: #D3CCC2;
+}
+.text-pastel-gray {
+    color: #D3CCC2;
+}
