@@ -1,5 +1,7 @@
 ﻿using System.Net.NetworkInformation;
+using _3DBook.Core;
 using Ardalis.SharedKernel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace _3DBook.Infrastructure;
@@ -13,6 +15,9 @@ public static class InfrastructureServiceExtensions
         string? connectionString = config.GetConnectionString("DefaultConnection");
         GuardClauses.GuardClause.IsNullOrEmptyString(connectionString,nameof(connectionString));
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddIdentity<User, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
             .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));

@@ -1,14 +1,18 @@
 ﻿using System.Reflection;
+using _3DBook.Core;
 using _3DBook.Core.FolderAggregate;
 using _3DBook.Core.ItemAggregate;
 using _3DBook.Core.MachineAggregate;
 using Ardalis.SharedKernel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace _3DBook.Infrastructure;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,IDomainEventDispatcher? dispatcher) : IdentityDbContext(options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IDomainEventDispatcher? dispatcher)
+    : IdentityDbContext<User>(options)
 {
     private readonly IDomainEventDispatcher? _dispatcher = dispatcher;
     public DbSet<Folder> Folders => Set<Folder>();

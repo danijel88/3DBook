@@ -1,6 +1,7 @@
 
 
 using _3DBook.Core;
+using _3DBook.Infrastructure;
 using _3DBook.Utils.Configurations;
 using _3DBook.Utils.Seeds;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +27,21 @@ builder.Services.AddServiceConfigs(appLogger, builder);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        var userManager = services.GetRequiredService<UserManager<User>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await ApplicationDbContextSeed.SeedRolesAndDefaultAdminUserAsync(userManager, roleManager);
+    }
+    catch (Exception exception)
+    {
+        logger.Error(exception,"An error occured seeding DB");
+    }
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
