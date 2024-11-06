@@ -1,4 +1,5 @@
 ﻿using _3DBook.Infrastructure.Email;
+using _3DBook.UseCases.UserAggregate.Auth;
 
 namespace _3DBook.Utils.Configurations;
 
@@ -17,6 +18,7 @@ public static class OptionConfigs
             });
 
 
+        services.AddScoped<IAuthService, AuthService>();
         
 
         logger.LogInformation("{Project} were configured", "Options");

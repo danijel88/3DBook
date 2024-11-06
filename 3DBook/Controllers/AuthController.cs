@@ -1,5 +1,5 @@
-﻿using _3DBook.Core;
-using _3DBook.Models.AuthViewModel;
+﻿using _3DBook.Models.AuthViewModel;
+using _3DBook.UseCases.UserAggregate.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -8,13 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace _3DBook.Controllers;
 
 [AllowAnonymous]
-public class AuthController(SignInManager<User> signInManager,ILogger<AuthController> logger) : Controller
+public class AuthController(IAuthService authService) : Controller
 {
-    private SignInManager<User> _signInManager = signInManager;
-    private ILogger<AuthController> _logger = logger;
+    private IAuthService _authService = authService;
 
     [HttpGet]
-    public async Task<IActionResult> Login(string returnUrl = null)
+    public async Task<IActionResult> Login(string? returnUrl = null)
     {
         // Clear the existing external cookie to ensure a clean login process
         await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -24,16 +23,17 @@ public class AuthController(SignInManager<User> signInManager,ILogger<AuthContro
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = returnUrl;
+        var count = ModelState.ErrorCount;
         if (ModelState.IsValid)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-            if (result.Succeeded)
+            var result = await _authService.LoginAsync(model);
+            if (result.IsSuccess)
             {
-                _logger.LogInformation($"User {model.Email} is logged. ");
-                return RedirectToLocal(returnUrl);
+                if (returnUrl != null) return RedirectToLocal(returnUrl);
             }
             else
             {
@@ -42,6 +42,12 @@ public class AuthController(SignInManager<User> signInManager,ILogger<AuthContro
             }
         }
         return View(model);
+    }
+    [HttpGet]
+    public async Task<IActionResult> Logout()
+    {
+        await _authService.LogoutAsync();
+        return RedirectToAction("Index", "Home");
     }
 
     private IActionResult RedirectToLocal(string returnUrl)

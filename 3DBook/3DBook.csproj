@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Result" Version="10.1.0" />
     <PackageReference Include="Ardalis.SharedKernel" Version="2.1.1" />
     <PackageReference Include="Ardalis.Specification" Version="8.0.0" />
     <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="8.0.0" />
@@ -34,7 +35,6 @@
 
   <ItemGroup>
     <Folder Include="logs\" />
-    <Folder Include="UseCases\" />
   </ItemGroup>
 
 </Project>

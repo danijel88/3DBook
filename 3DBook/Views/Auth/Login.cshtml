@@ -1,1 +1,4 @@
-﻿
+﻿@if (!User.Identity.IsAuthenticated)
+{
+    @await Html.PartialAsync("_LoginPartial")
+}
