@@ -27,6 +27,7 @@ public class AuthController(IAuthService authService) : Controller
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
         ViewData["ReturnUrl"] = returnUrl;
+        var count = ModelState.ErrorCount;
         if (ModelState.IsValid)
         {
             var result = await _authService.LoginAsync(model);
