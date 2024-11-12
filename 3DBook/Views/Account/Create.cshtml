@@ -1,0 +1,47 @@
+﻿@model _3DBook.Models.AccountViewModel.CreateAccountViewModel
+
+@{
+    ViewData["Title"] = "Create user";
+}
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label class="form-label">First name:</label>
+                <input class="form-control" asp-for="FirstName"/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last name:</label>
+                <input class="form-control" asp-for="LastName" /> 
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Company:</label>
+                <input class="form-control" asp-for="Company" /> 
+                <span asp-validation-for="Company" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email:</label>
+                <input class="form-control" asp-for="Email" /> 
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" class="form-control" asp-for="Password" /> 
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Role:</label>
+                <select class="form-control" asp-for="RoleName" asp-items="@ViewBag.Roles"></select>
+                
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-outline-dark">Save</button>
+                
+            </div>
+        </form>
+    </div>
+</div>
