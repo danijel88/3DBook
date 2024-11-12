@@ -7,4 +7,5 @@ public interface IAccountService
 {
     Task<List<AccountsViewModel>> GetAllAccountsAsync();
     Task<Result> CreateUserAsync(CreateAccountViewModel model);
+    Task<Result> ChangePassword(ChangePasswordViewModel model);
 }

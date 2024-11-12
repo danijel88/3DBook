@@ -52,6 +52,21 @@ public class AccountController(IAccountService accountService, IValidator<Create
         return View(model);
     }
 
+    [Authorize]
+    [HttpGet("Account/ChangePassword")]
+    public IActionResult ChangePassword()
+    {
+        return View();
+    }
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+    {
+     
+
+        return View(model);
+    }
+
     private async Task<List<SelectListItem>> GetRoles()
     {
         var roleList = new List<SelectListItem>();

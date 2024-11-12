@@ -49,4 +49,26 @@ public class AccountService(UserManager<User> userManager,ILogger<AccountService
             _logger.LogInformation($"User {model.Email} has been created successfully");
             return Result.Success();
     }
+
+    /// <inheritdoc />
+    public async Task<Result> ChangePassword(ChangePasswordViewModel model)
+    {
+        _logger.LogInformation($"Change password for {model.Email}");
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user == null)
+        {
+            return Result.NotFound();
+        }
+
+        var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+        if (result.Succeeded)
+        {
+            _logger.LogInformation("Password successfully changed.");
+            return Result.Success();
+        }
+
+        _logger.LogError($"There is some error on changing: {result.Errors.FirstOrDefault().Description}");
+        return Result.Error("Password not changed");
+
+    }
 }
