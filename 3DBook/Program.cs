@@ -3,7 +3,6 @@
 using _3DBook.Core;
 using _3DBook.Infrastructure;
 using _3DBook.Utils.Configurations;
-using _3DBook.Utils.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 using Serilog.Extensions.Logging;
@@ -12,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var logger = Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
-    .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("logs\\log.txt", rollingInterval: RollingInterval.Day,retainedFileCountLimit:10)
     .CreateLogger();
 logger.Information("Starting web host");
 builder.AddLoggerConfigs();

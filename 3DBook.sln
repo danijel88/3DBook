@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DBook", "3DBook\3DBook.csproj", "{52EA18F3-A08B-4A4E-9934-2AFF14717D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DBook.UnitTests", "3DBook.UnitTests\3DBook.UnitTests.csproj", "{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DBook.UnitTests", "3DBook.UnitTests\3DBook.UnitTests.csproj", "{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DBook.FunctionalTests", "3DBook.FunctionalTests\3DBook.FunctionalTests.csproj", "{668D2000-30FC-4068-815B-6FD8BE03B951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC93186A-9CE9-44A6-AA05-9BFC2362B58D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668D2000-30FC-4068-815B-6FD8BE03B951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668D2000-30FC-4068-815B-6FD8BE03B951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668D2000-30FC-4068-815B-6FD8BE03B951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668D2000-30FC-4068-815B-6FD8BE03B951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
