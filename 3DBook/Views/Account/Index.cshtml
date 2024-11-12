@@ -23,10 +23,21 @@
                         <td>@user.Company</td>
                         <td>@user.IsActive</td>
                         <td>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                               data-bs-title="Deactivate user.">
-                                <i class="bi bi-ban"></i>
-                            </button>
+                            @if (user.IsActive)
+                            {
+                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Deactivate user.">
+                                    <i class="bi bi-ban"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-title="Activate user.">
+                                    <i class="bi bi-cloud-check"></i>
+                                </button>
+                            }
+                          
                             <a class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
                                data-bs-title="Reset password.">
                                 <i class="bi bi-envelope"></i>
