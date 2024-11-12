@@ -7,13 +7,14 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace _3DBook.Controllers;
 
 [Authorize(Roles = "Administrator")]
-public class AccountController(IAccountService accountService, IValidator<CreateAccountViewModel> createAccountValidator,RoleManager<IdentityRole> roleManager) : Controller
+public class AccountController(IAccountService accountService, IValidator<CreateAccountViewModel> createAccountValidator, RoleManager<IdentityRole> roleManager) : Controller
 {
     private readonly IAccountService _accountService = accountService;
     private readonly IValidator<CreateAccountViewModel> _createAccountValidator = createAccountValidator;
@@ -62,9 +63,23 @@ public class AccountController(IAccountService accountService, IValidator<Create
     [HttpPost]
     public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
     {
-     
-
-        return View(model);
+      
+        var result = await _accountService.ChangePassword(model,User.Identity.Name);
+        if (!result.IsSuccess)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("Error", error);
+            }
+            return View(model);
+        }
+        return RedirectToAction("ChangePasswordConfirmation", "Account");
+    }
+    [Authorize]
+    [HttpGet]
+    public IActionResult ChangePasswordConfirmation()
+    {
+        return View();
     }
 
     private async Task<List<SelectListItem>> GetRoles()
@@ -73,7 +88,7 @@ public class AccountController(IAccountService accountService, IValidator<Create
         var roles = await _roleManager.Roles.ToListAsync();
         foreach (var role in roles)
         {
-            roleList.Add(new SelectListItem(role.Name,role.Name));
+            roleList.Add(new SelectListItem(role.Name, role.Name));
         }
 
         return roleList;

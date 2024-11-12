@@ -51,10 +51,10 @@ public class AccountService(UserManager<User> userManager,ILogger<AccountService
     }
 
     /// <inheritdoc />
-    public async Task<Result> ChangePassword(ChangePasswordViewModel model)
+    public async Task<Result> ChangePassword(ChangePasswordViewModel model,string email)
     {
-        _logger.LogInformation($"Change password for {model.Email}");
-        var user = await _userManager.FindByEmailAsync(model.Email);
+        _logger.LogInformation($"Change password for {email}");
+        var user = await _userManager.FindByEmailAsync(email);
         if (user == null)
         {
             return Result.NotFound();
@@ -68,7 +68,8 @@ public class AccountService(UserManager<User> userManager,ILogger<AccountService
         }
 
         _logger.LogError($"There is some error on changing: {result.Errors.FirstOrDefault().Description}");
-        return Result.Error("Password not changed");
+
+        return Result.Error(result.Errors.FirstOrDefault().Description);
 
     }
 }
