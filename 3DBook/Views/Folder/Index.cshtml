@@ -1,0 +1,55 @@
+﻿@model List<_3DBook.Models.FolderViewModel.FoldersViewModel>
+
+@{
+    ViewData["Title"] = "Folders list";
+}
+
+@if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+{
+    <a class="btn btn-dark" asp-action="Create" asp-controller="Folder">Create</a>
+    <hr />
+}
+<div class="card mb-3">
+    <div class="card-header bg-grullo">
+        <div class="card-title text-white text-center"><h1>Filters</h1></div>
+    </div>
+    <div class="card-body">
+    </div>
+</div>
+
+@foreach (var folder in Model)
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header border border-dark text-center">
+                            <label class="form-label"><strong>3D Code:</strong></label>
+                            @folder.Code
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <strong>Folds:</strong>@folder.Folds
+                                </div>
+                                <div class="col-4">
+                                    <strong>Enter:</strong>@folder.Enter
+                                </div>
+                                <div class="col-4">
+                                    <strong>Exit:</strong>@folder.Exit
+                                </div>
+                                <div class="col-8">
+                                    <strong>Machine:</strong>@folder.MachineName
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-outline-dark">Children</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

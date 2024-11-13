@@ -15,12 +15,14 @@ public class FolderServiceTests
     private readonly IFolderService _folderService;
     private readonly Mock<ILogger<FolderService>> _logger;
     private readonly Mock<IRepository<Folder>> _repositoryMock;
+    private readonly Mock<IRepository<Machine>> _machineMock;
 
     public FolderServiceTests()
     {
         _logger = new Mock<ILogger<FolderService>>();
         _repositoryMock = new Mock<IRepository<Folder>>();
-        _folderService = new FolderService(_repositoryMock.Object, _logger.Object);
+        _machineMock = new Mock<IRepository<Machine>>();
+        _folderService = new FolderService(_repositoryMock.Object, _logger.Object,_machineMock.Object);
     }
 
     [Fact]
@@ -36,6 +38,48 @@ public class FolderServiceTests
         Assert.NotNull(result);
         Assert.Equal(2, result.Count);
         Assert.Equal("4_20_10_ZZ", result.FirstOrDefault()!.Code);
+    }
+
+    [Fact]
+    public async Task CreateAsync_WhenSaveSuccessful_ReturnsSuccess()
+    {
+        var viewModel = new CreateFolderViewModel()
+        {
+            Enter = 20,
+            Exit = 15,
+            Folds = 1,
+            MachineId = 1
+        };
+        var folder = new Folder(viewModel.Folds, viewModel.Enter, viewModel.Exit, viewModel.MachineId, "DL");
+        _machineMock.Setup(s => s.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Machine("Double", "DL"));
+        _repositoryMock.Setup(s => s.AddAsync(It.IsAny<Folder>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(folder);
+        _repositoryMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(0);
+        var result = await _folderService.CreateAsync(viewModel);
+
+        Assert.True(result.IsSuccess);
+        Assert.Equal($"{viewModel.Folds}_{viewModel.Enter}_{viewModel.Exit}_DL",folder.Code);
+    }
+    [Fact]
+    public async Task CreateAsync_WhenSaveNotSuccessful_ReturnsError()
+    {
+        var viewModel = new CreateFolderViewModel()
+        {
+            Enter = 20,
+            Exit = 15,
+            Folds = 1,
+            MachineId = 1
+        };
+        var folder = new Folder(viewModel.Folds, viewModel.Enter, viewModel.Exit, viewModel.MachineId, "DL");
+        _machineMock.Setup(s => s.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Machine("Double", "DL"));
+        _repositoryMock.Setup(s => s.AddAsync(It.IsAny<Folder>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(folder);
+        _repositoryMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
+        var result = await _folderService.CreateAsync(viewModel);
+
+        Assert.False(result.IsSuccess);
     }
 
     private List<Folder> GetSampleData()
