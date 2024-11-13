@@ -3,7 +3,7 @@ using GuardClauses;
 
 namespace _3DBook.Core.MachineAggregate;
 
-public class Machine :EntityBase
+public class Machine :EntityBase, IAggregateRoot
 {
     public Machine(string name, string sortCode)
     {

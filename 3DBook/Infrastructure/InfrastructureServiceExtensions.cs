@@ -1,5 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 using _3DBook.Core;
+using _3DBook.Core.MachineAggregate;
 using Ardalis.SharedKernel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

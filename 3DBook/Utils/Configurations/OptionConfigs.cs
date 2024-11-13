@@ -2,6 +2,7 @@
 using _3DBook.Models.AccountViewModel;
 using _3DBook.UseCases.AccountsAggregate;
 using _3DBook.UseCases.AccountsAggregate.Validators;
+using _3DBook.UseCases.MachineAggregate;
 using _3DBook.UseCases.UserAggregate.Auth;
 using FluentValidation;
 
@@ -24,6 +25,7 @@ public static class OptionConfigs
 
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<IMachineService, MachineService>();
 
         services.AddScoped<IValidator<CreateAccountViewModel>, CreateAccountValidator>();
         

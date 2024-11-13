@@ -1,0 +1,29 @@
+﻿@model IList<_3DBook.Models.MachineViewModel.MachinesViewModel>
+@{
+    ViewData["Title"] = "Machine list";
+}
+<a class="btn btn-dark col-2" asp-action="Create" asp-controller="Machine">Add New</a>
+<hr />
+<div class="row justify-content-center">
+
+    <div class="col-auto">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Sort Code</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var machine in Model)
+                {
+                    <tr>
+                        <td>@machine.Name</td>
+                        <td>@machine.SortCode</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
