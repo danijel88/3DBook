@@ -16,16 +16,16 @@
     <div class="card-body">
         <div class="row">
             <div class="col-4 mb-2">
-                <input class="form-control" placeholder="Folds" />
+                <input class="form-control" id="folds" placeholder="Folds" />
             </div>
             <div class="col-4 mb-2">
-                <input class="form-control" placeholder="Enter" />
+                <input class="form-control" id="enter" placeholder="Enter" />
             </div>
             <div class="col-4 mb-2">
-                <input class="form-control" placeholder="Exit" />
+                <input class="form-control" id="exit" placeholder="Exit" />
             </div>
             <div class="col-4 mb-2">
-                <input class="form-control" placeholder="Machine" />
+                <input class="form-control" id="machine" placeholder="Machine" />
             </div>
         </div>
     </div>
@@ -33,8 +33,8 @@
 <div class="row">
     @foreach (var folder in Model)
     {
-        <div class="col-xl-4 col-md-4 col-sm-12">
-            <div class="card">
+        <div class="col-xl-4 col-md-4 col-sm-12 toHide">
+            <div class="card ">
                 <div class="card-body">
                     <div class="card">
                         <div class="card-header border border-dark text-center">
@@ -43,16 +43,16 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-4 col-sm-12" id="destFolds">
                                     <strong>Folds: </strong>@folder.Folds mm
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-4 col-sm-12" id="destEnter">
                                     <strong>Enter: </strong>@folder.Enter mm
                                 </div>
-                                <div class="col-md-4 col-sm-12">
+                                <div class="col-md-4 col-sm-12" id="destExit">
                                     <strong>Exit: </strong>@folder.Exit mm
                                 </div>
-                                <div class="col-md-8 col-sm-12">
+                                <div class="col-md-8 col-sm-12" id="destMachine">
                                     <strong>Machine: </strong>@folder.MachineName
                                 </div>
                             </div>
@@ -67,4 +67,8 @@
     }
 
 </div>
+@section Scripts
+{
+    <script src="~/js/search-folders.js" asp-append-version="true"></script>
+}
 
