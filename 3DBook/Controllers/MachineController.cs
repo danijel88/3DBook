@@ -21,7 +21,7 @@ public class MachineController(IMachineService machineService, ILogger<MachineCo
         var machines = await _machineService.ListAsync();
         return View(machines);
     }
-
+    [Authorize(Roles = "Administrator, Manager")]
     [HttpGet("Machine/Create")]
     public IActionResult Create()
     {
@@ -29,6 +29,7 @@ public class MachineController(IMachineService machineService, ILogger<MachineCo
         return View();
     }
 
+    [Authorize(Roles = "Administrator, Manager")]
     [HttpPost("Machine/Create")]
     [AutoValidateAntiforgeryToken]
     public async Task<IActionResult> Create(CreateMachineViewModel model)

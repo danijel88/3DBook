@@ -25,6 +25,7 @@ public class MachineService(IRepository<Machine> machineRepository, ILogger<Mach
         var machines = await _machineRepository.ListAsync();
         return machines.Select(s => new MachinesViewModel
         {
+            Id = s.Id,
             Name = s.Name,
             SortCode = s.SortCode
         }).ToList();
