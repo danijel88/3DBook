@@ -9,8 +9,8 @@ public class FolderConstructor
 {
    
     private int _folds = 2;
-    private decimal _enter = 52;
-    private decimal _exit = 16;
+    private int _enter = 52;
+    private int _exit = 16;
     private int _machineId = 1;
     private string code = "2_52_16_ZZ";
     private string _sortCode = "ZZ";

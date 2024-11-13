@@ -12,9 +12,6 @@ public class FolderConfiguration : IEntityTypeConfiguration<Folder>
         builder.Property(p => p.Code)
             .IsRequired()
             .HasMaxLength(DataSchemaConstants.DEFAULT_NAME_LENGTH);
-        builder.Property(p => p.Enter)
-            .HasColumnType(DataSchemaConstants.DEFAULT_DECIMAL_TYPE);
-        builder.Property(p => p.Exit)
-            .HasColumnType(DataSchemaConstants.DEFAULT_DECIMAL_TYPE);
+        
     }
 }
