@@ -41,6 +41,12 @@ public class MachineController(IMachineService machineService, ILogger<MachineCo
             return View(model);
         }
 
+        var response = await _machineService.CreateAsync(model);
+        if (!response.IsSuccess)
+        {
+            ModelState.AddModelError("Error","Fail to save");
+            return View(model);
+        }
         return RedirectToAction("Index", "Machine");
     }
 }
