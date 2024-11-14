@@ -1,9 +1,11 @@
-wwwroot/* linguist-vendored
+
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
 * text=auto
-
+*.cs linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
