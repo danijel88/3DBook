@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\3DBook.UnitTests\3DBook.UnitTests.csproj" />
     <ProjectReference Include="..\3DBook\3DBook.csproj" />
   </ItemGroup>
 

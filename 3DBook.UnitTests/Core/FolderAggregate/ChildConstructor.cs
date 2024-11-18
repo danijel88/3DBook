@@ -21,7 +21,6 @@ public class ChildConstructor
     }
 
     [Fact]
-    
     public void InitializeNewChild()
     {
         _child = CreateChild();

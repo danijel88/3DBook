@@ -3,7 +3,7 @@ using Ardalis.SharedKernel;
 
 namespace _3DBook.Core.FolderAggregate;
 
-public class ChildImage : EntityBase
+public class ChildImage : EntityBase, IAggregateRoot
 {
     public ChildImage(string path, int childId)
     {

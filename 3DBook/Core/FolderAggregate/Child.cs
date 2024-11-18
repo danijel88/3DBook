@@ -2,12 +2,12 @@
 
 namespace _3DBook.Core.FolderAggregate;
 
-public class Child : EntityBase
+public class Child : EntityBase,IAggregateRoot
 {
     /// <inheritdoc />
-    public Child(int elasticSize, int folderId, int mouthLength, int mouthWidth, decimal thickness, string plm)
+    public Child(int elasticSize, int folderId, int mouthLength, int mouthWidth, decimal thickness, string? plm)
     {
-        GuardClauses.GuardClause.IsNegative(elasticSize,nameof(elasticSize));
+        GuardClauses.GuardClause.IsNegative(elasticSize, nameof(elasticSize));
         GuardClauses.GuardClause.IsNegative(mouthLength, nameof(mouthLength));
         GuardClauses.GuardClause.IsNegative(mouthWidth, nameof(mouthWidth));
         GuardClauses.GuardClause.IsNegative(thickness, nameof(thickness));
@@ -21,11 +21,17 @@ public class Child : EntityBase
         Code = $"T{thickness}_Mw{mouthWidth}_Ml{mouthLength}_E{elasticSize}";
     }
 
+    public Child(int elasticSize, int folderId, int mouthLength, int mouthWidth, decimal thickness, string? plm,Folder folder) : this(elasticSize, folderId, mouthLength, mouthWidth, thickness, plm)
+    {
+        Folder = folder;
+    }
+
     public decimal Thickness { get; private set; }
     public int MouthWidth { get; private set; }
     public int MouthLength { get; private set; }
     public int ElasticSize { get; private set; }
     public int FolderId { get; private set; }
     public string Code { get; }
-    public string Plm { get; private set; }
+    public string? Plm { get; private set; }
+    public Folder Folder { get; private set; }
 }
