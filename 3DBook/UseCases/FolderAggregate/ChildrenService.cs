@@ -57,7 +57,7 @@ public class ChildrenService(IRepository<Child> childRepository, ILogger<Childre
     }
 
     /// <inheritdoc />
-    public async Task<Result<string>> Download(int id)
+    public async Task<Result<string>> DownloadAsync(int id)
     {
         var childImage = await _childImageRepository.GetByIdAsync(id);
         if (childImage == null)
@@ -66,5 +66,24 @@ public class ChildrenService(IRepository<Child> childRepository, ILogger<Childre
         }
 
         return childImage.Path;
+    }
+
+    /// <inheritdoc />
+    public async Task<Result> DeleteAsync(int childId)
+    {
+        var child = await _childRepository.GetByIdAsync(childId);
+        var childImagesSpec = new ChildImagesByChildSpec(childId);
+        var childImages = await _childImageRepository.ListAsync(childImagesSpec);
+        foreach (var image in childImages)
+        {
+            File.Delete(image.Path);
+        }
+
+        await _childImageRepository.DeleteRangeAsync(childImages);
+        await _childRepository.DeleteAsync(child);
+        await _childRepository.SaveChangesAsync();
+        await _childImageRepository.SaveChangesAsync();
+        return Result.Success();
+        
     }
 }
