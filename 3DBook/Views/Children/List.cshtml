@@ -1,0 +1,36 @@
+﻿@model List<_3DBook.Models.ChildrenViewModels.ChildrenViewModel>
+
+@{
+    ViewData["Title"] = "Children List";
+}
+@if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+{
+    <a class="btn btn-dark" asp-controller="Children" asp-action="Create" asp-route-id="@ViewBag.FolderId">Create</a>
+    <hr />
+}
+<div class="row">
+    <div class="col col-xl-6 col-md-8 col-sm-12">
+        <table class="table table-responsive table-responsive-sm">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Plm</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var element in Model)
+                {
+                    <tr>
+                        <td>@element.FatherCode @element.Code</td>
+                        <td>@element.Plm</td>
+                        <td>
+                            <a class="btn btn-outline-dark">Edit</a>
+                            <a class="btn btn-dark" src="@element.Path" download><i class="bi bi-cloud-download"></i>Download</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
