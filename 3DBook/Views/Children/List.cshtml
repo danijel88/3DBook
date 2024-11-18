@@ -26,7 +26,7 @@
                         <td>@element.Plm</td>
                         <td>
                             <a class="btn btn-outline-dark">Edit</a>
-                            <a class="btn btn-dark" src="@element.Path" download><i class="bi bi-cloud-download"></i>Download</a>
+                            <a class="btn btn-dark" asp-action="Download" asp-route-id="@element.ChildImageId"><i class="bi bi-cloud-download"></i></a>
                         </td>
                     </tr>
                 }

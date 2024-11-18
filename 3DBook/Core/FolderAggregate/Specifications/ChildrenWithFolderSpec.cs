@@ -8,6 +8,7 @@ public class ChildrenWithFolderSpec : Specification<Child>
     {
         Query
             .Where(w=>w.FolderId == folderId)
-            .Include(x => x.Folder);
+            .Include(x => x.Folder)
+            .Include(x=>x.ChildImage);
     }
 }
