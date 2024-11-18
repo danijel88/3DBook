@@ -29,6 +29,8 @@ public class ChildrenService(IRepository<Child> childRepository, ILogger<Childre
             MouthWidth = s.MouthWidth,
             Plm = s.Plm,
             Thickness = s.Thickness,
+            Path = s.ChildImage.Path,
+            ChildImageId = s.ChildImage.Id
         }).ToList();
     }
 
@@ -52,5 +54,17 @@ public class ChildrenService(IRepository<Child> childRepository, ILogger<Childre
         await _childImageRepository.AddAsync(new ChildImage(path, childId));
         await _childImageRepository.SaveChangesAsync();
         return Result.Success();
+    }
+
+    /// <inheritdoc />
+    public async Task<Result<string>> Download(int id)
+    {
+        var childImage = await _childImageRepository.GetByIdAsync(id);
+        if (childImage == null)
+        {
+            return Result.NotFound();
+        }
+
+        return childImage.Path;
     }
 }

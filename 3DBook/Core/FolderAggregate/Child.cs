@@ -34,4 +34,5 @@ public class Child : EntityBase,IAggregateRoot
     public string Code { get; }
     public string? Plm { get; private set; }
     public Folder Folder { get; private set; }
+    public ChildImage ChildImage { get; private set; }
 }
