@@ -14,24 +14,24 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
     private readonly IChildrenService _childrenService = childrenService;
     private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
-    [HttpGet("Children/{id}/List")]
-    public async Task<IActionResult> List(int id)
+    [HttpGet("Children/{folderId}/List")]
+    public async Task<IActionResult> List(int folderId)
     {
-        var children = await _childrenService.ListAsync(id);
-        ViewBag.FolderId = id;
+        var children = await _childrenService.ListAsync(folderId);
+        ViewBag.FolderId = folderId;
         return View(children);
     }
 
     [Authorize(Roles = "Administrator,Manager")]
-    [HttpGet("Children/{id}/Create")]
-    public IActionResult Create(int id)
+    [HttpGet("Children/{folderId}/Create")]
+    public IActionResult Create(int folderId)
     {
         return View();
     }
 
     [Authorize(Roles = "Administrator,Manager")]
-    [HttpPost("Children/{id}/Create")]
-    public async Task<IActionResult> Create(int id, CreateChildrenViewModel model, IFormFile file)
+    [HttpPost("Children/{folderId}/Create")]
+    public async Task<IActionResult> Create(int folderId, CreateChildrenViewModel model, IFormFile file)
     {
         if (file.Length == 0)
         {
@@ -39,7 +39,7 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
             return View(model);
         }
 
-        await UploadFile(id, model, file);
+        await UploadFile(folderId, model, file);
 
         var result = await _childrenService.CreateAsync(model);
         if (!result.IsSuccess)
@@ -48,17 +48,25 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
             return View(model);
         }
 
-        return RedirectToAction("List", new { id = id });
+        return RedirectToAction("List", new { id = folderId });
     }
 
 
-    [HttpGet("Children/{id}/Download")]
-    public async Task<IActionResult> Download(int id)
+    [HttpGet("Children/{childId}/Download")]
+    public async Task<IActionResult> Download(int childId)
     {
-        var filePath = await _childrenService.Download(id);
+        var filePath = await _childrenService.DownloadAsync(childId);
         var file = Path.GetFileName(filePath.Value);
         var contentType = GetContentType(filePath);
         return File(filePath, contentType, file);
+    }
+
+    [Authorize(Roles = "Administrator,Manager")]
+    [HttpGet("Children/{folderId}/Delete/{childId}")]
+    public async Task<IActionResult> Delete(int childId,int folderId)
+    {
+        await _childrenService.DeleteAsync(childId);
+        return RedirectToAction("List", "Children", new { folderId = folderId });
     }
     public static string GetContentType(string filePath)
     {

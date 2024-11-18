@@ -8,5 +8,6 @@ public interface IChildrenService
     Task<List<ChildrenViewModel>> ListAsync(int folderId);
     Task<Result> CreateAsync(CreateChildrenViewModel createViewModel);
     Task<Result> AddChildImage(string path, int childId);
-    Task<Result<string>> Download(int id);
+    Task<Result<string>> DownloadAsync(int id);
+    Task<Result> DeleteAsync(int childId);
 }
