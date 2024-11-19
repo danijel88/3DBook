@@ -5,7 +5,7 @@
 }
 @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
 {
-    <a class="btn btn-dark" asp-controller="Children" asp-action="Create" asp-route-id="@ViewBag.FolderId">Create</a>
+    <a class="btn btn-dark" asp-controller="Children" asp-action="Create" asp-route-folderId="@ViewBag.FolderId">Create</a>
     <hr />
 }
 <div class="row">
