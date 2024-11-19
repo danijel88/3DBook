@@ -28,7 +28,7 @@ public class ChildrenServiceTests
         _childImageRepoMock = new Mock<IRepository<ChildImage>>();
         _mockingChildrenService = new Mock<IChildrenService>();
         _webHostEnvMock = new Mock<IWebHostEnvironment>();
-        _childrenService = new ChildrenService(_repositoryMock.Object,_logger.Object,_childImageRepoMock.Object,_webHostEnvMock.Object);
+        _childrenService = new ChildrenService(_repositoryMock.Object, _logger.Object, _childImageRepoMock.Object, _webHostEnvMock.Object);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class ChildrenServiceTests
         var result = await _childrenService.ListAsync(1);
 
         Assert.NotNull(result);
-        Assert.Equal("T2.5_Mw7_Ml5_E1",result.FirstOrDefault()!.Code);
+        Assert.Equal("T2.5_Mw7_Ml5_E1", result.FirstOrDefault()!.Code);
     }
 
     [Fact]
@@ -50,9 +50,9 @@ public class ChildrenServiceTests
     {
         _repositoryMock.Setup(x => x.AddAsync(It.IsAny<Child>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Child(1, 1, 5, 2, 2.5m, null));
-        _childImageRepoMock.Setup(x => x.AddAsync(new ChildImage("D:\\Upload\\filename.ext",1), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new ChildImage("D:\\Upload",1));
-        
+        _childImageRepoMock.Setup(x => x.AddAsync(new ChildImage("D:\\Upload\\filename.ext", 1), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new ChildImage("D:\\Upload", 1));
+
         _repositoryMock.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(0);
         var createViewModel = new CreateChildrenViewModel
         {
@@ -64,10 +64,36 @@ public class ChildrenServiceTests
             ElasticSize = 1,
             UploadPath = @"D:\\Upload\\filename.ext"
         };
-        
+
         var result = await _childrenService.CreateAsync(createViewModel);
 
         Assert.True(result.IsSuccess);
+    }
+
+    [Fact]
+    public async Task Edit_WhenUpdateSaveSuccessfully_ReturnsSuccess()
+    {// Arrange
+        int childId = 1;
+        string oldPlm = "OldPLM";
+        string newPlm = "NewPLM";
+
+        var child = new Child(10, 1, 20, 30, 0.5m, oldPlm);
+        _repositoryMock
+            .Setup(x => x.GetByIdAsync(childId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(child);
+
+        _repositoryMock.
+            Setup(x => x.UpdateAsync(It.IsAny<Child>(), It.IsAny<CancellationToken>()))
+            .Returns(Task.CompletedTask);
+        _repositoryMock
+            .Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(0);
+
+
+        var result = await _childrenService.Edit(1, newPlm);
+
+        Assert.True(result.IsSuccess);
+        Assert.Equal(newPlm, child.Plm);
     }
 
     [UseCulture("en-US")]
@@ -76,7 +102,7 @@ public class ChildrenServiceTests
         var children = new List<Child>()
         {
             new Child(1, 1, 5, 7, 2.5m, null,new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
-            new Child(5, 1, 10, 7, 2.5m, "A356",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
+            new Child(5, 1, 10, 7, 2.5m, "A356",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",2)),
         };
         return children;
     }

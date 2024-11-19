@@ -1,7 +1,6 @@
 ﻿using _3DBook.Core.FolderAggregate;
 using _3DBook.Core.FolderAggregate.Specifications;
 using _3DBook.Models.ChildrenViewModels;
-using _3DBook.UseCases.FolderAggregate.Utils;
 using Ardalis.Result;
 using Ardalis.SharedKernel;
 
@@ -101,8 +100,7 @@ public class ChildrenService(IRepository<Child> childRepository,
         _logger.LogInformation("Editing childId: {childId}",childId);
         var child = await _childRepository.GetByIdAsync(childId);
         _logger.LogInformation($"Old Plm: {child.Plm} new value {plm}");
-        var builder = new ChildBuilder();
-        builder.UpdatePlm(child, plm);
+        child.UpdatePlm(plm);
         await _childRepository.UpdateAsync(child);
         await _childRepository.SaveChangesAsync();
         return Result.Success();
