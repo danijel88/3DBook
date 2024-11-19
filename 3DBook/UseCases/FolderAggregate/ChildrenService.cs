@@ -6,11 +6,15 @@ using Ardalis.SharedKernel;
 
 namespace _3DBook.UseCases.FolderAggregate;
 
-public class ChildrenService(IRepository<Child> childRepository, ILogger<ChildrenService> logger, IRepository<ChildImage> childImageRepository) : IChildrenService
+public class ChildrenService(IRepository<Child> childRepository,
+    ILogger<ChildrenService> logger,
+    IRepository<ChildImage> childImageRepository,
+    IWebHostEnvironment webHostEnvironment) : IChildrenService
 {
     private readonly IRepository<Child> _childRepository = childRepository;
     private readonly IRepository<ChildImage> _childImageRepository = childImageRepository;
     private readonly ILogger<ChildrenService> _logger = logger;
+    private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
 
     /// <param name="folderId"></param>
     /// <inheritdoc />
@@ -76,7 +80,7 @@ public class ChildrenService(IRepository<Child> childRepository, ILogger<Childre
         var childImages = await _childImageRepository.ListAsync(childImagesSpec);
         foreach (var image in childImages)
         {
-            File.Delete(image.Path);
+            File.Delete(_webHostEnvironment.WebRootPath + image.Path);
         }
 
         await _childImageRepository.DeleteRangeAsync(childImages);
