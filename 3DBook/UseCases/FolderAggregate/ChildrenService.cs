@@ -1,6 +1,7 @@
 ﻿using _3DBook.Core.FolderAggregate;
 using _3DBook.Core.FolderAggregate.Specifications;
 using _3DBook.Models.ChildrenViewModels;
+using _3DBook.UseCases.FolderAggregate.Utils;
 using Ardalis.Result;
 using Ardalis.SharedKernel;
 
@@ -75,19 +76,47 @@ public class ChildrenService(IRepository<Child> childRepository,
     /// <inheritdoc />
     public async Task<Result> DeleteAsync(int childId)
     {
+        _logger.LogInformation("Deleting childId: {childId}",childId);
         var child = await _childRepository.GetByIdAsync(childId);
         var childImagesSpec = new ChildImagesByChildSpec(childId);
         var childImages = await _childImageRepository.ListAsync(childImagesSpec);
         foreach (var image in childImages)
         {
+            _logger.LogInformation($"Deleting files: {_webHostEnvironment}{image.Path}");
             File.Delete(_webHostEnvironment.WebRootPath + image.Path);
         }
-
+        _logger.LogInformation("Saving deletion.");
         await _childImageRepository.DeleteRangeAsync(childImages);
         await _childRepository.DeleteAsync(child);
         await _childRepository.SaveChangesAsync();
         await _childImageRepository.SaveChangesAsync();
+        _logger.LogInformation("Saved.");
         return Result.Success();
         
+    }
+
+    /// <inheritdoc />
+    public async Task<Result> Edit(int childId,string plm)
+    {
+        _logger.LogInformation("Editing childId: {childId}",childId);
+        var child = await _childRepository.GetByIdAsync(childId);
+        _logger.LogInformation($"Old Plm: {child.Plm} new value {plm}");
+        var builder = new ChildBuilder();
+        builder.UpdatePlm(child, plm);
+        await _childRepository.UpdateAsync(child);
+        await _childRepository.SaveChangesAsync();
+        return Result.Success();
+        
+    }
+
+    /// <inheritdoc />
+    public async Task<EditChildrenViewModel> GetByIdAsync(int childId)
+    {
+        var response = new EditChildrenViewModel();
+        var child = await _childRepository.GetByIdAsync(childId);
+        if (child is null) return response;
+        response.ChildId = child.Id;
+        response.Plm = child.Plm;
+        return response;
     }
 }

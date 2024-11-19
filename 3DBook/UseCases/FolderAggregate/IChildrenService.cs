@@ -10,4 +10,6 @@ public interface IChildrenService
     Task<Result> AddChildImage(string path, int childId);
     Task<Result<string>> DownloadAsync(int id);
     Task<Result> DeleteAsync(int childId);
+    Task<Result> Edit(int childId, string plm);
+    Task<EditChildrenViewModel> GetByIdAsync(int childId);
 }
