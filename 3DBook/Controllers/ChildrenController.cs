@@ -2,6 +2,8 @@
 using System.Reflection;
 using _3DBook.Models.ChildrenViewModels;
 using _3DBook.UseCases.FolderAggregate;
+using _3DBook.UseCases.FolderAggregate.Validators;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +35,14 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
     [HttpPost("Children/{folderId}/Create")]
     public async Task<IActionResult> Create(int folderId, CreateChildrenViewModel model, IFormFile file)
     {
+        var validator = new CreateChildrenValidator();
+        var validationResult = await validator.ValidateAsync(model);
+        if (!validationResult.IsValid)
+        {
+            validationResult.AddToModelState(this.ModelState);
+            return View(model);
+        }
+
         if (file.Length == 0)
         {
             ModelState.AddModelError("Error", "File must be selected.");
@@ -48,7 +58,7 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
             return View(model);
         }
 
-        return RedirectToAction("List", new { id = folderId });
+        return RedirectToAction("List", new { folderId = folderId });
     }
 
 
@@ -67,6 +77,22 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
     {
         await _childrenService.DeleteAsync(childId);
         return RedirectToAction("List", "Children", new { folderId = folderId });
+    }
+
+    [Authorize(Roles = "Administrator,Manager")]
+    [HttpGet("Children/{folderId}/Edit/{childId}")]
+    public async Task<IActionResult> Edit(int folderId, int childId)
+    {
+        var response = await _childrenService.GetByIdAsync(childId);
+        return View(response);
+    }
+
+    [Authorize(Roles = "Administrator,Manager")]
+    [HttpPost("Children/{folderId}/Edit/{childId}")]
+    public async Task<IActionResult> Edit(int folderId, int childId, EditChildrenViewModel model)
+    {
+        await _childrenService.Edit(childId, model.Plm);
+        return RedirectToAction("List", new { folderId = folderId });
     }
     public static string GetContentType(string filePath)
     {
