@@ -5,6 +5,7 @@ using _3DBook.UnitTests.Core.Helpers;
 using _3DBook.UseCases.FolderAggregate;
 using Ardalis.Result;
 using Ardalis.SharedKernel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -18,6 +19,7 @@ public class ChildrenServiceTests
     private readonly Mock<IRepository<Child>> _repositoryMock;
     private readonly Mock<IRepository<ChildImage>> _childImageRepoMock;
     private readonly Mock<IChildrenService> _mockingChildrenService;
+    private readonly Mock<IWebHostEnvironment> _webHostEnvMock;
 
     public ChildrenServiceTests()
     {
@@ -25,7 +27,8 @@ public class ChildrenServiceTests
         _repositoryMock = new Mock<IRepository<Child>>();
         _childImageRepoMock = new Mock<IRepository<ChildImage>>();
         _mockingChildrenService = new Mock<IChildrenService>();
-        _childrenService = new ChildrenService(_repositoryMock.Object,_logger.Object,_childImageRepoMock.Object);
+        _webHostEnvMock = new Mock<IWebHostEnvironment>();
+        _childrenService = new ChildrenService(_repositoryMock.Object,_logger.Object,_childImageRepoMock.Object,_webHostEnvMock.Object);
     }
 
     [Fact]
@@ -72,8 +75,8 @@ public class ChildrenServiceTests
     {
         var children = new List<Child>()
         {
-            new Child(1, 1, 5, 7, 2.5m, null,new Folder(4,10,15,1,"ZZ")),
-            new Child(5, 1, 10, 7, 2.5m, "A356",new Folder(4,10,15,1,"ZZ")),
+            new Child(1, 1, 5, 7, 2.5m, null,new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
+            new Child(5, 1, 10, 7, 2.5m, "A356",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
         };
         return children;
     }

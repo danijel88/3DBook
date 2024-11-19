@@ -21,7 +21,7 @@ public class Child : EntityBase,IAggregateRoot
         Code = $"T{thickness}_Mw{mouthWidth}_Ml{mouthLength}_E{elasticSize}";
     }
 
-    public Child(int elasticSize, int folderId, int mouthLength, int mouthWidth, decimal thickness, string? plm,Folder folder) : this(elasticSize, folderId, mouthLength, mouthWidth, thickness, plm)
+    public Child(int elasticSize, int folderId, int mouthLength, int mouthWidth, decimal thickness, string? plm,Folder folder,ChildImage childImage) : this(elasticSize, folderId, mouthLength, mouthWidth, thickness, plm)
     {
         Folder = folder;
     }
