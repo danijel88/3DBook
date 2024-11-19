@@ -48,7 +48,7 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
             return View(model);
         }
 
-        return RedirectToAction("List", new { id = folderId });
+        return RedirectToAction("List", new { folderId = folderId });
     }
 
 
