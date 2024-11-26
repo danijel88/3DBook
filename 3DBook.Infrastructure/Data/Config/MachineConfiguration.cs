@@ -1,4 +1,5 @@
 ﻿using _3DBook.Core.MachineAggregate;
+using _3DBook.Core.MachineAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

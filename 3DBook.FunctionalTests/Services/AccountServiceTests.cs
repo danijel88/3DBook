@@ -16,15 +16,14 @@ public class AccountServiceTests
 {
     private readonly Mock<UserManager<User>> _userManagerMock;
     private readonly Mock<IHttpContextAccessor> _contextAccessorMock;
-    private readonly Mock<ILogger<AccountService>> _loggerMock;
     private readonly IAccountService _accountService;
 
     public AccountServiceTests()
     {
         _userManagerMock = CreateUserManagerMock();
         _contextAccessorMock = new Mock<IHttpContextAccessor>();
-        _loggerMock = new Mock<ILogger<AccountService>>();
-        _accountService = new AccountService(_userManagerMock.Object, _loggerMock.Object);
+        Mock<ILogger<AccountService>> loggerMock = new();
+        _accountService = new AccountService(_userManagerMock.Object, loggerMock.Object);
     }
 
     [Fact]

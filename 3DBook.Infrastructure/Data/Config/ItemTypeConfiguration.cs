@@ -1,17 +1,17 @@
-﻿using _3DBook.Core.FolderAggregate;
+﻿using _3DBook.Core.ItemAggregate;
+using _3DBook.Core.ItemAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace _3DBook.Infrastructure.Data.Config;
 
-public class FolderConfiguration : IEntityTypeConfiguration<Folder>
+public class ItemTypeConfiguration : IEntityTypeConfiguration<ItemType>
 {
     /// <inheritdoc />
-    public void Configure(EntityTypeBuilder<Folder> builder)
+    public void Configure(EntityTypeBuilder<ItemType> builder)
     {
-        builder.Property(p => p.Code)
+        builder.Property(p => p.Name)
             .IsRequired()
             .HasMaxLength(DataSchemaConstants.DEFAULT_NAME_LENGTH);
-        
     }
 }

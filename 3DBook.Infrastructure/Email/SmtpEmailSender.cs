@@ -1,5 +1,6 @@
 ﻿using System.Net.Mail;
 using _3DBook.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace _3DBook.Infrastructure.Email;

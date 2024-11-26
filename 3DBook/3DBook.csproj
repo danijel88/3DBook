@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\3DBook.Core\3DBook.Core.csproj" />
+    <ProjectReference Include="..\3DBook.Infrastructure\3DBook.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

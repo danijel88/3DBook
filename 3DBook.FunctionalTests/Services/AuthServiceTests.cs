@@ -10,9 +10,6 @@ namespace _3DBook.FunctionalTests.Services;
 
 public class AuthServiceTests
 {
-    private readonly Mock<UserManager<User>> _userManagerMock;
-    private readonly Mock<IHttpContextAccessor> _contextAccessorMock;
-    private readonly Mock<IUserClaimsPrincipalFactory<User>> _userClaimsPrincipalFactoryMock;
     private readonly Mock<ILogger<AuthService>> _loggerMock;
     private readonly Mock<SignInManager<User>> _signInManagerMock;
     private readonly AuthService _authService;
@@ -20,17 +17,17 @@ public class AuthServiceTests
     public AuthServiceTests()
     {
         // Mock UserManager, which is needed for SignInManager
-        _userManagerMock = new Mock<UserManager<User>>(
+        Mock<UserManager<User>> userManagerMock = new(
             Mock.Of<IUserStore<User>>(),
             null, null, null, null, null, null, null, null);
-        _contextAccessorMock = new Mock<IHttpContextAccessor>();
-        _userClaimsPrincipalFactoryMock = new Mock<IUserClaimsPrincipalFactory<User>>();
+        Mock<IHttpContextAccessor> contextAccessorMock = new();
+        Mock<IUserClaimsPrincipalFactory<User>> userClaimsPrincipalFactoryMock = new();
         _loggerMock = new Mock<ILogger<AuthService>>();
         // Mock SignInManager using mocked UserManager and other dependencies
         _signInManagerMock = new Mock<SignInManager<User>>(
-            _userManagerMock.Object,
-            _contextAccessorMock.Object,
-            _userClaimsPrincipalFactoryMock.Object,
+            userManagerMock.Object,
+            contextAccessorMock.Object,
+            userClaimsPrincipalFactoryMock.Object,
             null, null, null, null);
         // Assuming AccountService is the class where LoginAsync is defined
         _authService = new AuthService(_signInManagerMock.Object, _loggerMock.Object);

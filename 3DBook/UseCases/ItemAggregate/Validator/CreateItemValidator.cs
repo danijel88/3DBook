@@ -1,7 +1,7 @@
-﻿using _3DBook.Core.ItemAggregate;
-using _3DBook.Infrastructure.Data.Config;
-using _3DBook.Models.ItemViewModel;
+﻿using _3DBook.Infrastructure.Data.Config;
 using FluentValidation;
+using _3DBook.Models.ItemViewModel;
+
 
 namespace _3DBook.UseCases.ItemAggregate.Validator;
 
