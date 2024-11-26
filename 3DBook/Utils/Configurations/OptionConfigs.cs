@@ -31,6 +31,7 @@ public static class OptionConfigs
         services.AddScoped<IFolderService, FolderService>();
         services.AddScoped<IChildrenService, ChildrenService>();
         services.AddScoped<IItemTypeService, ItemTypeService>();
+        services.AddScoped<IItemService, ItemService>();
 
         services.AddScoped<IValidator<CreateAccountViewModel>, CreateAccountValidator>();
         

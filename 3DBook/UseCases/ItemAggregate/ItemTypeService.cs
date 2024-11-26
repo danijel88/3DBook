@@ -33,6 +33,7 @@ public class ItemTypeService(IRepository<ItemType> repository,ILogger<ItemTypeSe
         
         return itemTypes.Select(s => new ItemTypesViewModel
         {
+            Id = s.Id,
             Name = s.Name
         }).ToList();
     }
