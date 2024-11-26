@@ -3,6 +3,7 @@ using System.Reflection;
 using _3DBook.Models.ChildrenViewModels;
 using _3DBook.UseCases.FolderAggregate;
 using _3DBook.UseCases.FolderAggregate.Validators;
+using Ardalis.Result;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,23 +34,30 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
 
     [Authorize(Roles = "Administrator,Manager")]
     [HttpPost("Children/{folderId}/Create")]
-    public async Task<IActionResult> Create(int folderId, CreateChildrenViewModel model, IFormFile file)
+    public async Task<IActionResult> Create(int folderId, CreateChildrenViewModel model, List<IFormFile> files)
     {
         var validator = new CreateChildrenValidator();
         var validationResult = await validator.ValidateAsync(model);
+        var keys = ModelState.Keys;
         if (!validationResult.IsValid)
         {
             validationResult.AddToModelState(this.ModelState);
             return View(model);
         }
 
-        if (file.Length == 0)
+        if (files.Count < 2)
         {
             ModelState.AddModelError("Error", "File must be selected.");
             return View(model);
         }
 
-        await UploadFile(folderId, model, file);
+
+        var uploadResult = await UploadFile(folderId, model, files);
+        if (!uploadResult.IsSuccess)
+        {
+            ModelState.AddModelError("UploadPath", "Please check your files, if one file must be png or jpg, second file should be solidworks file.");
+            return View(model);
+        }
 
         var result = await _childrenService.CreateAsync(model);
         if (!result.IsSuccess)
@@ -103,19 +111,39 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
         return contentTypeProperty != null ? contentTypeProperty.GetValue(fileInfo).ToString() : "application/octet-stream";
     }
 
-    private async Task UploadFile(int id, CreateChildrenViewModel model, IFormFile file)
+    private async Task<Result> UploadFile(int id, CreateChildrenViewModel model, List<IFormFile> files)
     {
+        bool isAvatar = false;
+        bool isProdFile = false;
         if (!Directory.Exists(_webHostEnvironment.WebRootPath + "\\images\\")) ;
         {
             Directory.CreateDirectory(_webHostEnvironment.WebRootPath + "\\images\\");
         }
-
-        var filePath = Path.Combine(_webHostEnvironment.WebRootPath + "\\images\\" + file.FileName);
-        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        foreach (var file in files)
         {
-            await file.CopyToAsync(fileStream);
-            model.UploadPath = "\\images\\" + file.FileName;
-            model.FolderId = id;
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath + "\\images\\" + file.FileName);
+            var extension = Path.GetExtension(filePath);
+            if (extension == ".png" || extension == ".jpg")
+            {
+                isAvatar = true;
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                    model.Avatar = "\\images\\"+file.FileName;
+                }
+            }
+            else
+            {
+                isProdFile = true;
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                    model.UploadPath = "\\images\\" + file.FileName;
+                    model.FolderId = id;
+                }
+            }
         }
+        if (isProdFile && isAvatar) return Result.Success();
+        return Result.Error();
     }
 }

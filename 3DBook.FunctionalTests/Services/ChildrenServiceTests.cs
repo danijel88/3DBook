@@ -49,7 +49,7 @@ public class ChildrenServiceTests
     public async Task CreateAsync_WhenSaveSuccessfully_ReturnsSuccess()
     {
         _repositoryMock.Setup(x => x.AddAsync(It.IsAny<Child>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new Child(1, 1, 5, 2, 2.5m, null));
+            .ReturnsAsync(new Child(1, 1, 5, 2, 2.5m, null,@"D:\\"));
         _childImageRepoMock.Setup(x => x.AddAsync(new ChildImage("D:\\Upload\\filename.ext", 1), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new ChildImage("D:\\Upload", 1));
 
@@ -77,7 +77,7 @@ public class ChildrenServiceTests
         string oldPlm = "OldPLM";
         string newPlm = "NewPLM";
 
-        var child = new Child(10, 1, 20, 30, 0.5m, oldPlm);
+        var child = new Child(10, 1, 20, 30, 0.5m, oldPlm, @"D:\\");
         _repositoryMock
             .Setup(x => x.GetByIdAsync(childId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(child);
@@ -101,8 +101,8 @@ public class ChildrenServiceTests
     {
         var children = new List<Child>()
         {
-            new Child(1, 1, 5, 7, 2.5m, null,new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
-            new Child(5, 1, 10, 7, 2.5m, "A356",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",2)),
+            new Child(1, 1, 5, 7, 2.5m, null,@"D:\\",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
+            new Child(5, 1, 10, 7, 2.5m, "A356",@"D:\\",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",2)),
         };
         return children;
     }

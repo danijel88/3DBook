@@ -7,4 +7,5 @@ public class ChildrenViewModel : BaseChildrenViewModel
     public int Id { get; set; }
     public string Path { get; set; }
     public int ChildImageId { get; set; }
+    public string Avatar { get; set; }
 }

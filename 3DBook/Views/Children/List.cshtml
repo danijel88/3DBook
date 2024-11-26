@@ -12,21 +12,23 @@
     <div class="col col-xl-6 col-md-8 col-sm-12">
         <table class="table table-responsive table-responsive-sm">
             <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Plm</th>
-                    <th>Action</th>
-                </tr>
+            <tr>
+                <th>Image</th>
+                <th>Code</th>
+                <th>Plm</th>
+                <th>Action</th>
+            </tr>
             </thead>
             <tbody>
                 @foreach (var element in Model)
                 {
                     <tr>
+                        <td><img class=" rounded img-fluid" src="@element.Avatar" width="200" height="200" /></td>
                         <td>@element.FatherCode @element.Code</td>
                         <td>@element.Plm</td>
                         <td>
                             <a class="btn btn-outline-dark" asp-action="Edit" asp-controller="Children" asp-route-childId="@element.Id" asp-route-folderId="@ViewBag.FolderId"><i class="bi bi-pencil"></i> </a>
-                            <a class="btn btn-dark" asp-action="Download" asp-route-id="@element.ChildImageId"><i class="bi bi-cloud-download"></i></a>
+                            <a class="btn btn-dark" asp-action="Download" asp-route-childId="@element.ChildImageId"><i class="bi bi-cloud-download"></i></a>
                             <a class="btn btn-outline-dark" asp-action="Delete" asp-route-folderId="@ViewBag.FolderId" asp-route-childId="@element.Id"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>

@@ -16,5 +16,8 @@ public class ChildConfiguration : IEntityTypeConfiguration<Child>
             .HasMaxLength(DataSchemaConstants.DEFAULT_NAME_LENGTH);
         builder.Property(p => p.Thickness)
             .HasColumnType(DataSchemaConstants.DEFAULT_DECIMAL_TYPE);
+        builder.Property(p => p.Avatar)
+            .IsRequired()
+            .HasMaxLength(255);
     }
 }

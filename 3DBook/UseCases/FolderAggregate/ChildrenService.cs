@@ -34,7 +34,8 @@ public class ChildrenService(IRepository<Child> childRepository,
             Plm = s.Plm,
             Thickness = s.Thickness,
             Path = s.ChildImage.Path,
-            ChildImageId = s.ChildImage.Id
+            ChildImageId = s.ChildImage.Id,
+            Avatar = s.Avatar
         }).ToList();
     }
 
@@ -43,7 +44,7 @@ public class ChildrenService(IRepository<Child> childRepository,
     {
         _logger.LogInformation($"Creating child with parameters: Thickness - {createViewModel.Thickness}, MountWidth - {createViewModel.MouthWidth}, MountLength - {createViewModel.MouthLength}");
         var child = new Child(createViewModel.ElasticSize, createViewModel.FolderId, createViewModel.MouthLength,
-            createViewModel.MouthWidth, createViewModel.Thickness, createViewModel.Plm);
+            createViewModel.MouthWidth, createViewModel.Thickness, createViewModel.Plm,createViewModel.Avatar);
         var newChild = await _childRepository.AddAsync(child);
         var result = await _childRepository.SaveChangesAsync();
 

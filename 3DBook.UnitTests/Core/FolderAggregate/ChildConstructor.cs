@@ -13,11 +13,12 @@ public class ChildConstructor
     private string _code = "T1.0_Mw4_Ml5_E0";
     private int _folderId = 1;
     private string _plm = null;
+    private string _avatar = @"D:\\";
     private Child? _child;
 
     private Child CreateChild()
     {
-        return new Child(_elasticSize, _folderId, _mouthLength, _mouthWidth, _thickness,_plm);
+        return new Child(_elasticSize, _folderId, _mouthLength, _mouthWidth, _thickness,_plm,_avatar);
     }
 
     [Fact]
