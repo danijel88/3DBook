@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _3DBook.Infrastructure;
 
@@ -11,9 +12,11 @@ using _3DBook.Infrastructure;
 namespace _3DBook.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126082320_AddAvatarToItem")]
+    partial class AddAvatarToItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -278,13 +281,10 @@ namespace _3DBook.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Plm")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemTypeId");
-
-                    b.HasIndex("MachineId");
 
                     b.ToTable("Items");
                 });
@@ -306,9 +306,6 @@ namespace _3DBook.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId")
-                        .IsUnique();
 
                     b.ToTable("ItemsImages");
                 });
@@ -516,43 +513,9 @@ namespace _3DBook.Migrations
                     b.Navigation("Machine");
                 });
 
-            modelBuilder.Entity("_3DBook.Core.ItemAggregate.Item", b =>
-                {
-                    b.HasOne("_3DBook.Core.ItemAggregate.ItemType", "ItemType")
-                        .WithMany()
-                        .HasForeignKey("ItemTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_3DBook.Core.MachineAggregate.Machine", "Machine")
-                        .WithMany()
-                        .HasForeignKey("MachineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ItemType");
-
-                    b.Navigation("Machine");
-                });
-
-            modelBuilder.Entity("_3DBook.Core.ItemAggregate.ItemImage", b =>
-                {
-                    b.HasOne("_3DBook.Core.ItemAggregate.Item", null)
-                        .WithOne("ItemImage")
-                        .HasForeignKey("_3DBook.Core.ItemAggregate.ItemImage", "ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("_3DBook.Core.FolderAggregate.Child", b =>
                 {
                     b.Navigation("ChildImage")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("_3DBook.Core.ItemAggregate.Item", b =>
-                {
-                    b.Navigation("ItemImage")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

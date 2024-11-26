@@ -1,0 +1,72 @@
+﻿@model List<_3DBook.Models.ItemViewModel.ItemsViewModel>
+@if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+{
+    <a class="btn btn-dark" asp-controller="Item" asp-action="Create">Create</a>
+    <hr/>
+}
+
+
+<div class="card mb-3">
+    <div class="card-header bg-grullo">
+        <div class="card-title text-white text-center"><h1>Filters</h1></div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4 mb-2">
+                <input class="form-control" id="3dCode" placeholder="3D Code" />
+            </div>
+            <div class="col-4 mb-2">
+                <input class="form-control" id="plm" placeholder="Plm" />
+            </div>
+            <div class="col-4 mb-2">
+                <input class="form-control" id="attachment" placeholder="Attachment" />
+            </div>
+            <div class="col-4 mb-2">
+                <input class="form-control" id="machine" placeholder="Machine" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @foreach (var element in Model)
+    {
+        <div class="col-xl-4 col-md-4 col-sm-12 toHide">
+            <div class="card ">
+                <div class="card-body">
+                    
+                    <div class="card">
+                        <div class="card-header border border-dark text-center">
+                            <label class="form-label"><strong>3D Code:</strong></label>
+                            @element.Code
+                        </div>
+                        <img class=" img-fluid img-thumbnail" src="@element.Avatar" width="200" height="200" />
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12" id="destFolds">
+                                    <strong>Plm: </strong>@element.Plm
+                                </div>
+                                <div class="col-md-4 col-sm-12" id="destEnter">
+                                    <strong>Machine: </strong>@element.Machine
+                                </div>
+                                <div class="col-md-4 col-sm-12" id="destExit">
+                                    <strong>ItemType: </strong>@element.ItemType
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-outline-dark" asp-controller="Item" asp-action="Edit" asp-route-id="@element.Id"><i class="bi bi-pencil"></i> </a>
+                            <a class="btn btn-dark" asp-controller="Item" asp-action="Download" asp-route-itemImageId="@element.ItemImageId" ><i class="bi bi-cloud-download" ></i></a>
+                            <a class="btn btn-outline-dark" asp-controller="Item" asp-action="Delete" asp-route-itemId="@element.Id"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts
+{
+    <script src="~/js/search-folders.js" asp-append-version="true"></script>
+}
+

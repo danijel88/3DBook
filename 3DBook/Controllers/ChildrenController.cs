@@ -38,7 +38,7 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
     {
         var validator = new CreateChildrenValidator();
         var validationResult = await validator.ValidateAsync(model);
-        var keys = ModelState.Keys;
+       
         if (!validationResult.IsValid)
         {
             validationResult.AddToModelState(this.ModelState);

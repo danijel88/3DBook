@@ -3,7 +3,7 @@ using Ardalis.SharedKernel;
 
 namespace _3DBook.Core.ItemAggregate;
 
-public class ItemImage : EntityBase
+public class ItemImage : EntityBase, IAggregateRoot
 {
     public ItemImage(string path, int itemId)
     {
