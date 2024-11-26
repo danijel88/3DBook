@@ -8,11 +8,12 @@ public class ItemConstructor
     private string _plm = null;
     private int _machineId = 1;
     private int _itemTypeId = 1;
+    private string _avatar = @"D:\\";
     private Item? _item;
 
     private Item CreateItem()
     {
-        return new Item(_machineId, _plm, _code,_itemTypeId);
+        return new Item(_machineId, _plm, _code,_itemTypeId,_avatar);
     }
 
     [Fact]

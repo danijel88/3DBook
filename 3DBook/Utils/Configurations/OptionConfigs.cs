@@ -3,6 +3,7 @@ using _3DBook.Models.AccountViewModel;
 using _3DBook.UseCases.AccountsAggregate;
 using _3DBook.UseCases.AccountsAggregate.Validators;
 using _3DBook.UseCases.FolderAggregate;
+using _3DBook.UseCases.ItemAggregate;
 using _3DBook.UseCases.MachineAggregate;
 using _3DBook.UseCases.UserAggregate.Auth;
 using FluentValidation;
@@ -29,6 +30,7 @@ public static class OptionConfigs
         services.AddScoped<IMachineService, MachineService>();
         services.AddScoped<IFolderService, FolderService>();
         services.AddScoped<IChildrenService, ChildrenService>();
+        services.AddScoped<IItemTypeService, ItemTypeService>();
 
         services.AddScoped<IValidator<CreateAccountViewModel>, CreateAccountValidator>();
         
