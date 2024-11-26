@@ -1,5 +1,4 @@
-﻿using _3DBook.Core.FolderAggregate;
-using Ardalis.SharedKernel;
+﻿using Ardalis.SharedKernel;
 
 namespace _3DBook.Core.ItemAggregate;
 

@@ -1,5 +1,4 @@
-﻿using Ardalis.GuardClauses;
-using Ardalis.SharedKernel;
+﻿using Ardalis.SharedKernel;
 
 namespace _3DBook.Core.FolderAggregate;
 

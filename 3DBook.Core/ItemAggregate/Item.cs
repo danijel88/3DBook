@@ -1,5 +1,4 @@
 ﻿using _3DBook.Core.MachineAggregate;
-using Ardalis.GuardClauses;
 using Ardalis.SharedKernel;
 
 namespace _3DBook.Core.ItemAggregate;

@@ -41,4 +41,8 @@
     <Folder Include="logs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\3DBook.Core\3DBook.Core.csproj" />
+  </ItemGroup>
+
 </Project>

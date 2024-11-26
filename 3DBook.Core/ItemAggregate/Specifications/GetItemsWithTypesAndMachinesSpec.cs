@@ -1,5 +1,4 @@
 ﻿using Ardalis.Specification;
-using FluentValidation;
 
 namespace _3DBook.Core.ItemAggregate.Specifications;
 
