@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>_3DBook</RootNamespace>
+    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,6 +44,7 @@
     <Folder Include="Validators\MachineAggregate\Validators\" />
     <Folder Include="Validators\FolderAggregate\Validators\" />
     <Folder Include="Validators\ItemAggregate\Validator\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
