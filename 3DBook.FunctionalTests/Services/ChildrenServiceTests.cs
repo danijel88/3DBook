@@ -1,7 +1,7 @@
 ﻿using _3DBook.Core.FolderAggregate;
 using _3DBook.Core.FolderAggregate.Specifications;
-using _3DBook.Models.ChildrenViewModels;
 using _3DBook.UnitTests.Core.Helpers;
+using _3DBook.UseCases.Dtos.ChildrenViewModels;
 using _3DBook.UseCases.FolderAggregate;
 using Ardalis.Result;
 using Ardalis.SharedKernel;

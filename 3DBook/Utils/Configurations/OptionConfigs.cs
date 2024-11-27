@@ -1,11 +1,12 @@
-﻿using _3DBook.Infrastructure.Email;
+﻿using _3DBook.Core.MachineAggregate;
+using _3DBook.Infrastructure.Email;
 using _3DBook.Models.AccountViewModel;
 using _3DBook.UseCases.AccountsAggregate;
-using _3DBook.UseCases.AccountsAggregate.Validators;
 using _3DBook.UseCases.FolderAggregate;
 using _3DBook.UseCases.ItemAggregate;
 using _3DBook.UseCases.MachineAggregate;
 using _3DBook.UseCases.UserAggregate.Auth;
+using _3DBook.Validators.AccountsAggregate.Validators;
 using FluentValidation;
 
 namespace _3DBook.Utils.Configurations;

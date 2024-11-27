@@ -39,11 +39,16 @@
 
   <ItemGroup>
     <Folder Include="logs\" />
+    <Folder Include="Validators\ItemAggregate\Validator\" />
+    <Folder Include="Validators\MachineAggregate\Validators\" />
+    <Folder Include="Validators\FolderAggregate\Validators\" />
+    <Folder Include="Validators\ItemAggregate\Validator\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\3DBook.Core\3DBook.Core.csproj" />
     <ProjectReference Include="..\3DBook.Infrastructure\3DBook.Infrastructure.csproj" />
+    <ProjectReference Include="..\3DBook.UseCases\3DBook.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

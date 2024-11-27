@@ -34,7 +34,7 @@ public class Child : EntityBase,IAggregateRoot
     public int MouthLength { get; private set; }
     public int ElasticSize { get; private set; }
     public int FolderId { get; private set; }
-    public string Code { get; }
+    public string Code { get; private set; }
     public string? Plm { get; private set; }
     public string Avatar { get; private set; }
     public Folder Folder { get; private set; }

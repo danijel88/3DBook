@@ -1,7 +1,7 @@
 ﻿using _3DBook.Core.FolderAggregate;
 using _3DBook.Core.FolderAggregate.Specifications;
 using _3DBook.Core.MachineAggregate;
-using _3DBook.Models.FolderViewModel;
+using _3DBook.UseCases.Dtos.FolderViewModel;
 using _3DBook.UseCases.FolderAggregate;
 using Ardalis.SharedKernel;
 using Microsoft.Extensions.Logging;

@@ -1,6 +1,4 @@
 ﻿using _3DBook.Core.FolderAggregate;
-using _3DBook.Models.ChildrenViewModels;
-using _3DBook.Models.ItemViewModel;
 using _3DBook.UseCases.FolderAggregate;
 using _3DBook.UseCases.ItemAggregate;
 using _3DBook.UseCases.MachineAggregate;
@@ -9,7 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Reflection;
-using _3DBook.UseCases.ItemAggregate.Validator;
+using _3DBook.Core.MachineAggregate;
+using _3DBook.UseCases.Dtos.ItemViewModel;
+using _3DBook.Validators.ItemAggregate.Validator;
 using FluentValidation.AspNetCore;
 
 namespace _3DBook.Controllers;
