@@ -1,8 +1,8 @@
-﻿using _3DBook.Models.FolderViewModel;
-using _3DBook.Models.MachineViewModel;
+﻿using _3DBook.Core.MachineAggregate;
+using _3DBook.UseCases.Dtos.FolderViewModel;
 using _3DBook.UseCases.FolderAggregate;
-using _3DBook.UseCases.FolderAggregate.Validators;
 using _3DBook.UseCases.MachineAggregate;
+using _3DBook.Validators.FolderAggregate.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

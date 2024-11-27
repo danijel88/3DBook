@@ -1,7 +1,8 @@
-﻿using _3DBook.Models.AccountViewModel;
-using _3DBook.Models.MachineViewModel;
+﻿using _3DBook.Core.MachineAggregate;
+using _3DBook.Models.AccountViewModel;
+using _3DBook.UseCases.Dtos.MachineViewModel;
 using _3DBook.UseCases.MachineAggregate;
-using _3DBook.UseCases.MachineAggregate.Validators;
+using _3DBook.Validators.MachineAggregate.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;

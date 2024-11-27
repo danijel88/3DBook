@@ -1,4 +1,4 @@
-﻿@model List<_3DBook.Models.ItemViewModel.ItemsViewModel>
+﻿@model List<_3DBook.UseCases.Dtos.ItemViewModel.ItemsViewModel>
 @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
 {
     <a class="btn btn-dark" asp-controller="Item" asp-action="Create">Create</a>

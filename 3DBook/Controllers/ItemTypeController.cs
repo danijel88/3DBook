@@ -1,6 +1,6 @@
-﻿using _3DBook.Models.ItemTypeViewModel;
+﻿using _3DBook.UseCases.Dtos.ItemTypeViewModel;
 using _3DBook.UseCases.ItemAggregate;
-using _3DBook.UseCases.ItemAggregate.Validator;
+using _3DBook.Validators.ItemAggregate.Validator;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
 using System.Reflection;
-using _3DBook.Models.ChildrenViewModels;
+using _3DBook.UseCases.Dtos.ChildrenViewModels;
 using _3DBook.UseCases.FolderAggregate;
-using _3DBook.UseCases.FolderAggregate.Validators;
+using _3DBook.Validators.FolderAggregate.Validators;
 using Ardalis.Result;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;

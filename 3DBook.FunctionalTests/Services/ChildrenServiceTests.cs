@@ -1,7 +1,7 @@
 ﻿using _3DBook.Core.FolderAggregate;
 using _3DBook.Core.FolderAggregate.Specifications;
-using _3DBook.Models.ChildrenViewModels;
 using _3DBook.UnitTests.Core.Helpers;
+using _3DBook.UseCases.Dtos.ChildrenViewModels;
 using _3DBook.UseCases.FolderAggregate;
 using Ardalis.Result;
 using Ardalis.SharedKernel;
@@ -15,20 +15,18 @@ namespace _3DBook.FunctionalTests.Services;
 public class ChildrenServiceTests
 {
     private readonly IChildrenService _childrenService;
-    private readonly Mock<ILogger<ChildrenService>> _logger;
     private readonly Mock<IRepository<Child>> _repositoryMock;
     private readonly Mock<IRepository<ChildImage>> _childImageRepoMock;
     private readonly Mock<IChildrenService> _mockingChildrenService;
-    private readonly Mock<IWebHostEnvironment> _webHostEnvMock;
 
     public ChildrenServiceTests()
     {
-        _logger = new Mock<ILogger<ChildrenService>>();
+        Mock<ILogger<ChildrenService>> logger = new();
         _repositoryMock = new Mock<IRepository<Child>>();
         _childImageRepoMock = new Mock<IRepository<ChildImage>>();
         _mockingChildrenService = new Mock<IChildrenService>();
-        _webHostEnvMock = new Mock<IWebHostEnvironment>();
-        _childrenService = new ChildrenService(_repositoryMock.Object, _logger.Object, _childImageRepoMock.Object, _webHostEnvMock.Object);
+        Mock<IWebHostEnvironment> webHostEnvMock = new();
+        _childrenService = new ChildrenService(_repositoryMock.Object, logger.Object, _childImageRepoMock.Object, webHostEnvMock.Object);
     }
 
     [Fact]

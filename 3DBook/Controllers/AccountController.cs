@@ -1,6 +1,5 @@
 ﻿using _3DBook.Models.AccountViewModel;
 using _3DBook.UseCases.AccountsAggregate;
-using _3DBook.UseCases.AccountsAggregate.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidation.Results;

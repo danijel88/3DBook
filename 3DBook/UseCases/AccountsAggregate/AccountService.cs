@@ -1,6 +1,5 @@
 ﻿using _3DBook.Core;
 using _3DBook.Models.AccountViewModel;
-using _3DBook.UseCases.AccountsAggregate.Validators;
 using Ardalis.Result;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

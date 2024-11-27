@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>_3DBook.Core</RootNamespace>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Ardalis.SharedKernel" Version="2.1.1" />
+		<PackageReference Include="GuardClauses" Version="1.2.4" />
+	</ItemGroup>
+</Project>
