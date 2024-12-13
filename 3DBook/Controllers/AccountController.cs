@@ -52,6 +52,55 @@ public class AccountController(IAccountService accountService, IValidator<Create
         return View(model);
     }
 
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult ForgotPassword()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [AutoValidateAntiforgeryToken]
+    [AllowAnonymous]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _accountService.ForgotPassword(model.Email, Request.Scheme);
+            if (result.IsSuccess)
+            {
+                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+            }
+        }
+        return View();
+    }
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult ForgotPasswordConfirmation()
+    {
+        return View();
+    }
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult ResetPassword(string userId = null, string code = null)
+    {
+        if (code == null)
+        {
+            throw new ApplicationException("A code must be supplied for password reset.");
+        }
+        var model = new ResetPasswordViewModel { Code = code };
+        return View(model);
+    }
+
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+    {
+        await _accountService.ResetPassword(model.Email, model.Code, model.Password);
+        return RedirectToAction("Index", "Home");
+    }
+
+
     [Authorize]
     [HttpGet("Account/ChangePassword")]
     public IActionResult ChangePassword()

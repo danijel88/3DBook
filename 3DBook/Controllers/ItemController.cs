@@ -105,6 +105,7 @@ public class ItemController(IItemService itemService,
 
 
     [HttpGet("Item/{itemImageId}/Download")]
+    [Authorize(Roles = "Administrator,Manager,Member")]
     public async Task<IActionResult> Download(int itemImageId)
     {
         var filePath = await _itemService.DownloadAsync(itemImageId);

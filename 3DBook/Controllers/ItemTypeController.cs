@@ -20,12 +20,14 @@ public class ItemTypeController(IItemTypeService itemTypeService) : Controller
     }
 
     [HttpGet("ItemType/Create")]
+    [Authorize(Roles = "Administrator,Manager")]
     public IActionResult Create()
     {
         return View();
     }
 
     [HttpPost("ItemType/Create")]
+    [Authorize(Roles = "Administrator,Manager")]
     [AutoValidateAntiforgeryToken]
     public async Task<IActionResult> Create(CreateItemTypeViewModel model)
     {

@@ -16,7 +16,7 @@ public class SmtpEmailSender(ILogger<SmtpEmailSender> logger,IOptions<MailServer
         var emailClient = new SmtpClient(_mailServerConfiguration.Hostname, _mailServerConfiguration.Port);
         var message = new MailMessage
         {
-            From = new MailAddress("from"),
+            From = new MailAddress(from),
             Subject = subject,
             Body = body
         };

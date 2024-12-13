@@ -27,9 +27,9 @@
                         <td>@element.FatherCode @element.Code</td>
                         <td>@element.Plm</td>
                         <td>
-                            <a class="btn btn-outline-dark" asp-action="Edit" asp-controller="Children" asp-route-childId="@element.Id" asp-route-folderId="@ViewBag.FolderId"><i class="bi bi-pencil"></i> </a>
-                            <a class="btn btn-dark" asp-action="Download" asp-route-childId="@element.ChildImageId"><i class="bi bi-cloud-download"></i></a>
-                            <a class="btn btn-outline-dark" asp-action="Delete" asp-route-folderId="@ViewBag.FolderId" asp-route-childId="@element.Id"><i class="bi bi-trash"></i></a>
+                            <a class="btn btn-outline-dark" asp-action="Edit" asp-controller="Children" asp-route-childId="@element.Id" asp-route-folderId="@ViewBag.FolderId" data-bs-toggle="tooltip" data-bs-title="Edit"><i class="bi bi-pencil"></i> </a>
+                            <a class="btn btn-dark" asp-action="Download" asp-route-childId="@element.ChildImageId" data-bs-toggle="tooltip" data-bs-title="Download"><i class="bi bi-cloud-download"></i></a>
+                            <a class="btn btn-outline-dark" asp-action="Delete" asp-route-folderId="@ViewBag.FolderId" asp-route-childId="@element.Id" data-bs-toggle="tooltip" data-bs-title="Delete"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 }

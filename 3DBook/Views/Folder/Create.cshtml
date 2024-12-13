@@ -9,17 +9,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
                 <label class="form-label">Folds</label>
-                <input class="form-control" asp-for="Folds" />
+                <input class="form-control" min="1" asp-for="Folds" />
                 <span asp-validation-for="Folds" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Enter</label>
-                <input class="form-control" asp-for="Enter" />
+                <input class="form-control" min="1" asp-for="Enter" />
                 <span asp-validation-for="Enter" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Exit</label>
-                <input class="form-control" asp-for="Exit" />
+                <input class="form-control" min="1" asp-for="Exit" />
                 <span asp-validation-for="Exit" class="text-danger"></span>
             </div>
             <div class="mb-3">

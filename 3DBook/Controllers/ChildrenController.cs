@@ -47,7 +47,7 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
 
         if (files.Count < 2)
         {
-            ModelState.AddModelError("Error", "File must be selected.");
+            ModelState.AddModelError("UploadPath", "We must have 2 files, one file must be with extension jpg or png, second file is for downloading 3d part.");
             return View(model);
         }
 
@@ -71,6 +71,7 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
 
 
     [HttpGet("Children/{childId}/Download")]
+    [Authorize(Roles = "Administrator,Manager,Member")]
     public async Task<IActionResult> Download(int childId)
     {
         var filePath = await _childrenService.DownloadAsync(childId);
