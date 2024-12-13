@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _3DBook.Controllers;
 
-[Authorize(Roles = "Administrator")]
+
 public class AccountController(IAccountService accountService, IValidator<CreateAccountViewModel> createAccountValidator, RoleManager<IdentityRole> roleManager) : Controller
 {
     private readonly IAccountService _accountService = accountService;
@@ -20,6 +20,7 @@ public class AccountController(IAccountService accountService, IValidator<Create
     private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
     [HttpGet("Account/Index")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Index()
     {
 
@@ -28,6 +29,7 @@ public class AccountController(IAccountService accountService, IValidator<Create
     }
 
     [HttpGet("Account/Create")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Create()
     {
         ViewBag.Roles = await GetRoles();
@@ -36,6 +38,7 @@ public class AccountController(IAccountService accountService, IValidator<Create
 
     [HttpPost]
     [AutoValidateAntiforgeryToken]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> Create(CreateAccountViewModel model)
     {
         ValidationResult result = await _createAccountValidator.ValidateAsync(model);
@@ -101,14 +104,16 @@ public class AccountController(IAccountService accountService, IValidator<Create
     }
 
 
-    [Authorize]
+    
     [HttpGet("Account/ChangePassword")]
+    [Authorize(Roles = "Administrator,Manager,Member,Operator")]
     public IActionResult ChangePassword()
     {
         return View();
     }
-    [Authorize]
+    
     [HttpPost]
+    [Authorize(Roles = "Administrator,Manager,Member,Operator")]
     public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
     {
       
@@ -123,8 +128,9 @@ public class AccountController(IAccountService accountService, IValidator<Create
         }
         return RedirectToAction("ChangePasswordConfirmation", "Account");
     }
-    [Authorize]
+ 
     [HttpGet]
+    [Authorize(Roles = "Administrator,Manager,Member,Operator")]
     public IActionResult ChangePasswordConfirmation()
     {
         return View();
