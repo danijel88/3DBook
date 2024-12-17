@@ -32,4 +32,17 @@ public class Folder : EntityBase,IAggregateRoot
     public int Exit { get; private set; }
     public int MachineId { get; private set; }
     public Machine Machine { get; private set; }
+
+    public void UpdateFolder(int folds, int enter, int exit, int machineId, string sortCode)
+    {
+        GuardClauses.GuardClause.IsNegative(folds, nameof(folds));
+        GuardClauses.GuardClause.IsNegative(enter, nameof(enter));
+        GuardClauses.GuardClause.IsNegative(exit, nameof(exit));
+        GuardClauses.GuardClause.IsZeroOrNegative(machineId, nameof(machineId));
+        Code = $"{folds}_{enter}_{exit}_{sortCode}";
+        Folds = folds;
+        Enter = enter;
+        Exit = exit;
+        MachineId = machineId;
+    }
 }

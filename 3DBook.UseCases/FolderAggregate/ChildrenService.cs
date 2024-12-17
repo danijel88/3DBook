@@ -98,12 +98,12 @@ public class ChildrenService(IRepository<Child> childRepository,
     }
 
     /// <inheritdoc />
-    public async Task<Result> Edit(int childId,string plm)
+    public async Task<Result> Edit(int childId, EditChildrenViewModel model)
     {
         _logger.LogInformation("Editing childId: {childId}",childId);
         var child = await _childRepository.GetByIdAsync(childId);
-        _logger.LogInformation($"Old Plm: {child.Plm} new value {plm}");
-        child.UpdatePlm(plm);
+        _logger.LogInformation($"Old Plm: {child.Plm} new value {model}");
+        child.UpdateChild(model.ElasticSize,model.MouthLength,model.MouthWidth,model.Thickness,model.Plm);
         await _childRepository.UpdateAsync(child);
         await _childRepository.SaveChangesAsync();
         return Result.Success();
@@ -118,6 +118,10 @@ public class ChildrenService(IRepository<Child> childRepository,
         if (child is null) return response;
         response.ChildId = child.Id;
         response.Plm = child.Plm;
+        response.ElasticSize = child.ElasticSize;
+        response.MouthLength = child.MouthLength;
+        response.MouthWidth = child.MouthWidth;
+        response.Thickness = child.Thickness;
         return response;
     }
 }

@@ -55,6 +55,38 @@ public class FolderController(IFolderService folderService,ILogger<FolderControl
         return RedirectToAction("Index", "Folder");
     }
 
+    [Authorize(Roles = "Administrator,Manager")]
+    [HttpGet("Folder/{id}/Edit")]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var model = await _folderService.GetFolderByIdAsync(id);
+        ViewBag.Machines = await GetMachines();
+        return View(model);
+    }
+
+    [Authorize(Roles = "Administrator,Manager")]
+    [HttpPost("Folder/{id}/Edit")]
+    [AutoValidateAntiforgeryToken]
+    public async Task<IActionResult> Edit(int id,CreateFolderViewModel model)
+    {
+        var validator = new CreateFolderValidator();
+        var validatorResult
+            = await validator.ValidateAsync(model);
+        if (!validatorResult.IsValid)
+        {
+            validatorResult.AddToModelState(this.ModelState);
+            ViewBag.Machines = await GetMachines();
+            return View(model);
+        }
+        var result = await _folderService.UpdateAsync(model, id);
+        if (!result.IsSuccess)
+        {
+            ModelState.AddModelError("Error", "Failed to save.");
+            return View(model);
+        }
+        return RedirectToAction("Index");
+    }
+
     private async Task<List<SelectListItem>> GetMachines()
     {
         var items = new List<SelectListItem>();

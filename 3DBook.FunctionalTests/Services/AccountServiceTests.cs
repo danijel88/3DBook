@@ -3,12 +3,14 @@ using _3DBook.Models.AccountViewModel;
 using _3DBook.UseCases.AccountsAggregate;
 using _3DBook.UseCases.UserAggregate.Auth;
 using Ardalis.Result;
+using Castle.Core.Smtp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Moq.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MockQueryable;
 using Moq;
+using IEmailSender = _3DBook.Core.Interfaces.IEmailSender;
 
 namespace _3DBook.FunctionalTests.Services;
 
@@ -17,13 +19,15 @@ public class AccountServiceTests
     private readonly Mock<UserManager<User>> _userManagerMock;
     private readonly Mock<IHttpContextAccessor> _contextAccessorMock;
     private readonly IAccountService _accountService;
+    private readonly Mock<IEmailSender> _emailSenderMock;
 
     public AccountServiceTests()
     {
         _userManagerMock = CreateUserManagerMock();
         _contextAccessorMock = new Mock<IHttpContextAccessor>();
         Mock<ILogger<AccountService>> loggerMock = new();
-        _accountService = new AccountService(_userManagerMock.Object, loggerMock.Object);
+        _emailSenderMock = new Mock<IEmailSender>();
+        _accountService = new AccountService(_userManagerMock.Object, loggerMock.Object,_emailSenderMock.Object);
     }
 
     [Fact]

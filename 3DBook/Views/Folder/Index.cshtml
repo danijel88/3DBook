@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4 col-sm-12" id="destFolds">
-                                    <strong>Folds: </strong>@folder.Folds mm
+                                    <strong>Folds: </strong>@folder.Folds
                                 </div>
                                 <div class="col-md-4 col-sm-12" id="destEnter">
                                     <strong>Enter: </strong>@folder.Enter mm
@@ -60,6 +60,7 @@
                         </div>
                         <div class="card-footer">
                             <a class="btn btn-outline-dark" asp-controller="Children" asp-action="List" asp-route-folderId="@folder.Id">Children</a>
+                            <a class="btn btn-dark" asp-controller="Folder" asp-action="Edit" asp-route-id="@folder.Id">Edit</a>
                         </div>
                     </div>
                 </div>

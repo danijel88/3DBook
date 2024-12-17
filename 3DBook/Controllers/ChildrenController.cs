@@ -98,9 +98,10 @@ public class ChildrenController(IChildrenService childrenService, IWebHostEnviro
 
     [Authorize(Roles = "Administrator,Manager")]
     [HttpPost("Children/{folderId}/Edit/{childId}")]
+    [AutoValidateAntiforgeryToken]
     public async Task<IActionResult> Edit(int folderId, int childId, EditChildrenViewModel model)
     {
-        await _childrenService.Edit(childId, model.Plm);
+        await _childrenService.Edit(childId, model);
         return RedirectToAction("List", new { folderId = folderId });
     }
     public static string GetContentType(string filePath)

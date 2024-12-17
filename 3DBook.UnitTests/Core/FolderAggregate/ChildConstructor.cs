@@ -28,4 +28,12 @@ public class ChildConstructor
         _child = CreateChild();
         Assert.Equal(_code,_child.Code);
     }
+
+    [Fact]
+    public void UpdateChild()
+    {
+        _child = CreateChild();
+        _child.UpdateChild(1, 1, 1, 1,  "plm");
+        Assert.Equal("T1.0_Mw1_Ml1_E1", _child.Code);
+    }
 }

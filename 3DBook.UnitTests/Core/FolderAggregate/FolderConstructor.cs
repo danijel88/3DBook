@@ -28,4 +28,12 @@ public class FolderConstructor
         Assert.Equal(code,_folder.Code);
     }
 
+    [Fact]
+    public void UpdateFolder()
+    {
+        _folder = CreateFolder();
+        _folder.UpdateFolder(3, 53, 17, 2, "AA");
+        Assert.Equal("3_53_17_AA", _folder.Code);
+    }
+
 }

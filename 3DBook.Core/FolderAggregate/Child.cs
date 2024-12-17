@@ -44,4 +44,17 @@ public class Child : EntityBase,IAggregateRoot
     {
         Plm = plm;
     }
+    public void UpdateChild(int elasticSize,  int mouthLength, int mouthWidth, decimal thickness, string? plm)
+    {
+        GuardClauses.GuardClause.IsNegative(elasticSize, nameof(elasticSize));
+        GuardClauses.GuardClause.IsNegative(mouthLength, nameof(mouthLength));
+        GuardClauses.GuardClause.IsNegative(mouthWidth, nameof(mouthWidth));
+        GuardClauses.GuardClause.IsNegative(thickness, nameof(thickness));
+        ElasticSize = elasticSize;
+        MouthLength = mouthLength;
+        MouthWidth = mouthWidth;
+        Thickness = thickness;
+        Plm = plm;
+        Code = $"T{thickness}_Mw{mouthWidth}_Ml{mouthLength}_E{elasticSize}";
+    }
 }

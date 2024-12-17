@@ -7,4 +7,6 @@ public interface IFolderService
 {
     public Task<List<FoldersViewModel>> ListAsync();
     public Task<Result> CreateAsync(CreateFolderViewModel model);
+    public Task<CreateFolderViewModel> GetFolderByIdAsync(int id);
+    public Task<Result> UpdateAsync(CreateFolderViewModel model, int id);
 }

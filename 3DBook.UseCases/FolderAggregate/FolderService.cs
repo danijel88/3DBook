@@ -51,4 +51,40 @@ public class FolderService(IRepository<Folder> folderRepository, ILogger<FolderS
         }
         return Result.Success();
     }
+
+    /// <inheritdoc />
+    public async Task<CreateFolderViewModel> GetFolderByIdAsync(int id)
+    {
+        _logger.LogInformation($"Editing folder with Id: {id}");
+        var folder = await _folderRepository.GetByIdAsync(id);
+        return new CreateFolderViewModel
+        {
+            Enter = folder.Enter,
+            Exit = folder.Exit,
+            Folds = folder.Folds,
+            MachineId = folder.MachineId,
+        };
+    }
+
+    /// <inheritdoc />
+    public async Task<Result> UpdateAsync(CreateFolderViewModel model, int id)
+    {
+        _logger.LogInformation($"Editing folder with new parameters, Enter: {model.Enter}, Exit: {model.Exit}, Folds: {model.Folds}, MachineId: {model.MachineId} ");
+        var machine = await _machineRepository.GetByIdAsync(model.MachineId);
+        if (machine is null)
+        {
+            _logger.LogError($"Machine with Id:{model.MachineId} does not exist");
+            return Result.Error("Machine does not exist.");
+        }
+        var folder = await _folderRepository.GetByIdAsync(id);
+        folder.UpdateFolder(model.Folds, model.Enter, model.Exit, model.MachineId, machine!.SortCode);
+        await _folderRepository.UpdateAsync(folder);
+        var result = await _folderRepository.SaveChangesAsync();
+        if (result != 0)
+        {
+            _logger.LogError("Error on saving folder");
+            return Result.Error("Error on saving");
+        }
+        return Result.Success();
+    }
 }
