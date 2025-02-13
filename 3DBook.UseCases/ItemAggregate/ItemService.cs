@@ -86,14 +86,16 @@ public class ItemService(IRepository<Item> repository,
         var item = await _repository.GetByIdAsync(id);
         if (item is null) return response;
         response.Plm = item.Plm;
+        response.MachineId = item.MachineId;
         return response;
     }
 
     /// <inheritdoc />
-    public async Task<Result> EditAsync(int id, string? plm)
+    public async Task<Result> EditAsync(int id, EditItemViewModel model)
     {
         var item = await _repository.GetByIdAsync(id);
-        item.UpdatePlm(plm);
+        item.UpdatePlm(model.Plm);
+        item.UpdateMachine(model.MachineId);
         await _repository.UpdateAsync(item);
         await _repository.SaveChangesAsync();
         return Result.Success();

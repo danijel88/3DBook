@@ -93,13 +93,14 @@ public class ItemController(IItemService itemService,
     public async Task<IActionResult> Edit(int id)
     {
         var response = await _itemService.GetByIdAsync(id);
+        ViewBag.Machines = await GetMachines();
         return View(response);
     }
     [Authorize(Roles = "Administrator,Manager")]
     [HttpPost("Item/{id}/Edit")]
     public async Task<IActionResult> Edit(int id,EditItemViewModel model)
     {
-        await _itemService.EditAsync(id, model.Plm);
+        await _itemService.EditAsync(id, model);
         return RedirectToAction("Index","Item");
     }
 

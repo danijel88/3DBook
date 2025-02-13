@@ -88,7 +88,7 @@ public class ChildrenServiceTests
             .ReturnsAsync(0);
 
 
-        var result = await _childrenService.Edit(1, newPlm);
+        var result = await _childrenService.Edit(1, new EditChildrenViewModel(){ChildId = 1, ElasticSize = 1,MouthLength = 1,MouthWidth = 1,Plm = newPlm,Thickness = 0.4m});
 
         Assert.True(result.IsSuccess);
         Assert.Equal(newPlm, child.Plm);

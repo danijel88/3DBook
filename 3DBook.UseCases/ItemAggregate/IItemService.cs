@@ -10,5 +10,5 @@ public interface IItemService
     Task<Result> DeleteAsync(int itemId);
     Task<Result<string>> DownloadAsync(int itemId);
     Task<EditItemViewModel> GetByIdAsync(int id);
-    Task<Result> EditAsync(int id, string? plm);
+    Task<Result> EditAsync(int id, EditItemViewModel model);
 }

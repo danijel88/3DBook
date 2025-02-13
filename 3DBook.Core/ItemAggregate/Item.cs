@@ -48,4 +48,9 @@ public class Item : EntityBase, IAggregateRoot
     {
         Plm = plm;
     }
+
+    public void UpdateMachine(int machineId)
+    {
+        MachineId = machineId;
+    }
 }

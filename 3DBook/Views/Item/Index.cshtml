@@ -19,7 +19,7 @@
                 <input class="form-control" id="plm" placeholder="Plm" />
             </div>
             <div class="col-4 mb-2">
-                <input class="form-control" id="attachment" placeholder="Attachment" />
+                <input class="form-control" id="itemType" placeholder="Item Type" />
             </div>
             <div class="col-4 mb-2">
                 <input class="form-control" id="machine" placeholder="Machine" />
@@ -35,20 +35,20 @@
                 <div class="card-body">
                     
                     <div class="card">
-                        <div class="card-header border border-dark text-center">
-                            <label class="form-label"><strong>3D Code:</strong></label>
+                        <div class="card-header border border-dark text-center" id="dest3DCode">
+                            <label class="form-label" ><strong>3D Code:</strong></label>
                             @element.Code
                         </div>
                         <img class=" img-fluid img-thumbnail" src="@element.Avatar" width="200" height="200" />
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4 col-sm-12" id="destFolds">
+                                <div class="col-md-4 col-sm-12" id="destPlm">
                                     <strong>Plm: </strong>@element.Plm
                                 </div>
-                                <div class="col-md-4 col-sm-12" id="destEnter">
+                                <div class="col-md-4 col-sm-12" id="destMachine">
                                     <strong>Machine: </strong>@element.Machine
                                 </div>
-                                <div class="col-md-4 col-sm-12" id="destExit">
+                                <div class="col-md-4 col-sm-12" id="destItemType">
                                     <strong>ItemType: </strong>@element.ItemType
                                 </div>
                             </div>
@@ -67,6 +67,6 @@
 </div>
 @section Scripts
 {
-    <script src="~/js/search-folders.js" asp-append-version="true"></script>
+    <script src="~/js/search-items.js" asp-append-version="true"></script>
 }
 
