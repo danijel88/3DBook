@@ -48,9 +48,10 @@ public class FolderServiceTests
             Enter = 20,
             Exit = 15,
             Folds = 1,
-            MachineId = 1
+            MachineId = 1,
+            Plm = "G150"
         };
-        var folder = new Folder(viewModel.Folds, viewModel.Enter, viewModel.Exit, viewModel.MachineId, "DL");
+        var folder = new Folder(viewModel.Folds, viewModel.Enter, viewModel.Exit, viewModel.MachineId, "DL",viewModel.Plm);
         _machineMock.Setup(s => s.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Machine("Double", "DL"));
         _repositoryMock.Setup(s => s.AddAsync(It.IsAny<Folder>(), It.IsAny<CancellationToken>()))
@@ -69,9 +70,10 @@ public class FolderServiceTests
             Enter = 20,
             Exit = 15,
             Folds = 1,
-            MachineId = 1
+            MachineId = 1,
+            Plm = null
         };
-        var folder = new Folder(viewModel.Folds, viewModel.Enter, viewModel.Exit, viewModel.MachineId, "DL");
+        var folder = new Folder(viewModel.Folds, viewModel.Enter, viewModel.Exit, viewModel.MachineId, "DL", viewModel.Plm);
         _machineMock.Setup(s => s.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Machine("Double", "DL"));
         _repositoryMock.Setup(s => s.AddAsync(It.IsAny<Folder>(), It.IsAny<CancellationToken>()))
@@ -86,8 +88,8 @@ public class FolderServiceTests
     {
         var folders = new List<Folder>
         {
-            new Folder(4,20,10,1,"ZZ",new Machine("Machine1", "ZZ")),
-            new Folder(5,25,15,1,"DL",new Machine("Machine2", "DL"))
+            new Folder(4,20,10,1,"ZZ",new Machine("Machine1", "ZZ"),"G150"),
+            new Folder(5,25,15,1,"DL",new Machine("Machine2", "DL"),null)
         };
         return folders;
     }

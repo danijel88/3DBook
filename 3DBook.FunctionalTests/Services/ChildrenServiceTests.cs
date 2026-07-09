@@ -99,8 +99,8 @@ public class ChildrenServiceTests
     {
         var children = new List<Child>()
         {
-            new Child(1, 1, 5, 7, 2.5m, null,@"D:\\",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",1)),
-            new Child(5, 1, 10, 7, 2.5m, "A356",@"D:\\",new Folder(4,10,15,1,"ZZ"),new ChildImage(@"D:\\",2)),
+            new Child(1, 1, 5, 7, 2.5m, null,@"D:\\",new Folder(4,10,15,1,"ZZ",null),new ChildImage(@"D:\\",1)),
+            new Child(5, 1, 10, 7, 2.5m, "A356",@"D:\\",new Folder(4,10,15,1,"ZZ","G120"),new ChildImage(@"D:\\",2)),
         };
         return children;
     }

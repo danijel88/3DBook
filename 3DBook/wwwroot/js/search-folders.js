@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#folds, #machine, #enter, #exit").keyup(function () {
+    $("#folds, #machine, #enter, #exit,#plm").keyup(function () {
         var getFilter = function (el, selector) {
             var txt = $(el).val().toLowerCase();
             return txt
@@ -13,6 +13,7 @@
             .filter(getFilter('#folds', '#destFolds'))
             .filter(getFilter('#enter', '#destEnter'))
             .filter(getFilter('#exit', '#destExit'))
+            .filter(getFilter('#plm', '#destPlm'))
             .show();
     });
 });

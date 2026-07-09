@@ -15,10 +15,11 @@ public class FolderConstructor
     private string code = "2_52_16_ZZ";
     private string _sortCode = "ZZ";
     private Folder? _folder;
+    private string? _plm;
     private Folder CreateFolder()
     {
     
-        return new Folder(_folds, _enter, _exit,_machineId,_sortCode);
+        return new Folder(_folds, _enter, _exit,_machineId,_sortCode,_plm);
     }
 
     [Fact]
@@ -32,7 +33,7 @@ public class FolderConstructor
     public void UpdateFolder()
     {
         _folder = CreateFolder();
-        _folder.UpdateFolder(3, 53, 17, 2, "AA");
+        _folder.UpdateFolder(3, 53, 17, 2, "AA",null);
         Assert.Equal("3_53_17_AA", _folder.Code);
     }
 

@@ -28,6 +28,7 @@ public class FolderService(IRepository<Folder> folderRepository, ILogger<FolderS
             MachineName = s.Machine.Name,
             Exit = s.Exit,
             Folds = s.Folds,
+            Plm = s.Plm
         }).ToList();
     }
 
@@ -41,7 +42,7 @@ public class FolderService(IRepository<Folder> folderRepository, ILogger<FolderS
             _logger.LogError($"Machine with Id:{model.MachineId} does not exist");
             return Result.Error("Machine does not exist.");
         }
-        var folder = new Folder(model.Folds, model.Enter, model.Exit, model.MachineId, machine!.SortCode);
+        var folder = new Folder(model.Folds, model.Enter, model.Exit, model.MachineId, machine!.SortCode, model!.Plm);
         await _folderRepository.AddAsync(folder);
         var result = await _folderRepository.SaveChangesAsync();
         if (result != 0)
@@ -63,13 +64,14 @@ public class FolderService(IRepository<Folder> folderRepository, ILogger<FolderS
             Exit = folder.Exit,
             Folds = folder.Folds,
             MachineId = folder.MachineId,
+            Plm = folder.Plm
         };
     }
 
     /// <inheritdoc />
     public async Task<Result> UpdateAsync(CreateFolderViewModel model, int id)
     {
-        _logger.LogInformation($"Editing folder with new parameters, Enter: {model.Enter}, Exit: {model.Exit}, Folds: {model.Folds}, MachineId: {model.MachineId} ");
+        _logger.LogInformation($"Editing folder with new parameters, Enter: {model.Enter}, Exit: {model.Exit}, Folds: {model.Folds}, MachineId: {model.MachineId}, Plm: {model.Plm} ");
         var machine = await _machineRepository.GetByIdAsync(model.MachineId);
         if (machine is null)
         {
@@ -77,7 +79,7 @@ public class FolderService(IRepository<Folder> folderRepository, ILogger<FolderS
             return Result.Error("Machine does not exist.");
         }
         var folder = await _folderRepository.GetByIdAsync(id);
-        folder.UpdateFolder(model.Folds, model.Enter, model.Exit, model.MachineId, machine!.SortCode);
+        folder.UpdateFolder(model.Folds, model.Enter, model.Exit, model.MachineId, machine!.SortCode,model.Plm);
         await _folderRepository.UpdateAsync(folder);
         var result = await _folderRepository.SaveChangesAsync();
         if (result != 0)

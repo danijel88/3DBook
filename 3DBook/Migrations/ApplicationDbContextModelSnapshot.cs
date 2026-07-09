@@ -165,13 +165,11 @@ namespace _3DBook.Migrations
 
                     b.Property<string>("Avatar")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ElasticSize")
                         .HasColumnType("int");
@@ -186,11 +184,10 @@ namespace _3DBook.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Plm")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Thickness")
-                        .HasColumnType("decimal(8,3)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -212,8 +209,7 @@ namespace _3DBook.Migrations
 
                     b.Property<string>("Path")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -233,8 +229,7 @@ namespace _3DBook.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Enter")
                         .HasColumnType("int");
@@ -247,6 +242,9 @@ namespace _3DBook.Migrations
 
                     b.Property<int>("MachineId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Plm")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -302,8 +300,7 @@ namespace _3DBook.Migrations
 
                     b.Property<string>("Path")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -323,8 +320,7 @@ namespace _3DBook.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -341,13 +337,11 @@ namespace _3DBook.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SortCode")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

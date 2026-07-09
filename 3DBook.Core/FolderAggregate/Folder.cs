@@ -6,7 +6,7 @@ namespace _3DBook.Core.FolderAggregate;
 public class Folder : EntityBase,IAggregateRoot
 {
     private Folder(){} //need for EF
-    public Folder(int folds, int enter, int exit,int machineId,string sortCode)
+    public Folder(int folds, int enter, int exit,int machineId,string sortCode, string? plm)
     {
         
         GuardClauses.GuardClause.IsNegative(folds,nameof(folds));
@@ -18,10 +18,11 @@ public class Folder : EntityBase,IAggregateRoot
         Enter = enter;
         Exit = exit;
         MachineId = machineId;
+        Plm = plm;
     }
     // Add a new constructor for testing only
-    public Folder(int folds, int enter, int exit, int machineId, string sortCode, Machine machine)
-        : this(folds, enter, exit, machineId, sortCode)
+    public Folder(int folds, int enter, int exit, int machineId, string sortCode, Machine machine,string? plm)
+        : this(folds, enter, exit, machineId, sortCode,plm)
     {
         Machine = machine;
     }
@@ -31,9 +32,10 @@ public class Folder : EntityBase,IAggregateRoot
     public int Enter { get; private set; }
     public int Exit { get; private set; }
     public int MachineId { get; private set; }
+    public string? Plm { get; private set; }
     public Machine Machine { get; private set; }
 
-    public void UpdateFolder(int folds, int enter, int exit, int machineId, string sortCode)
+    public void UpdateFolder(int folds, int enter, int exit, int machineId, string sortCode,string? plm)
     {
         GuardClauses.GuardClause.IsNegative(folds, nameof(folds));
         GuardClauses.GuardClause.IsNegative(enter, nameof(enter));
@@ -44,5 +46,6 @@ public class Folder : EntityBase,IAggregateRoot
         Enter = enter;
         Exit = exit;
         MachineId = machineId;
+        Plm = plm;
     }
 }
